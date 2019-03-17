@@ -3,7 +3,7 @@
 Heliveien 945, 1820 Spydeberg, Norway  
 Phone: +47 90516604  
 Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com/erter1) | github : [github.com/postmannen](https://github.com/postmannen)
-------------------- ---
+
 
 ## Profile
 
@@ -12,9 +12,8 @@ I am a creative person with a great passion for learning new things. My interest
 I started with programming at the age of 11 with languages like Basic, Pascal, and Assembler.
 My first job was within an OPS environment, so the programming became a thing I did when I needed a script to parse data, or a tool for some task. I decided to do something about just that in 2017.
 I quit my job after 20+ years working with servers/network/security, and decided to start a full time study within the Go programming language.
-------------------- ---
 
-### Education
+## Education
 
 1991-1995
 :   **Electronics, Certificate Of Apprenticeship**; Upper Secondary School
@@ -22,9 +21,8 @@ I quit my job after 20+ years working with servers/network/security, and decided
     - 1991-1993 Electronics
     - 1993-1994 Audio / Video
     - 1994-1995 Computer Tech. Computer Technical/Hardware, Micro controllers, Pascal, ASM.
-------------------- ---
 
-### Experience
+## Experience
 
 Been working with Data centers, Network, Security, Servers, and Monitoring since 1997. The most recent jobs can be found below.
 A full list can be found at my [LinkedIn profile](https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/).
