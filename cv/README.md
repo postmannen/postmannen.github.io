@@ -7,7 +7,7 @@ Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com
 
 ## Summary
 
-A creative technophile with a great passion for learning new things. My interests ranging from Programming, IT, Economy, Psychology, Art, Guitar, Piano, Electronics, Hydraulics, farming..and more.
+A creative technophile with a great passion for learning new things. My interests ranging from Programming, IT, Economy, Psychology, Art, Guitar, Piano, Electronics, Hydraulics, Farming..and more.
 In 2017 I decided to add Go Developer to that list.
 
 ## Professional Experience
