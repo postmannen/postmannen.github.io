@@ -9,7 +9,7 @@ Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com
 A creative technophile with a great passion for learning new things. My interests ranging from Programming, IT, Psychology, Economy, Art, Guitar, Piano, Electronics, Hydraulics, Farming..and more.
 In 2017 I decided to add Go Developer to that list.
 
-My biggest advantage is my wide range of experience, which often makes me see solutions from more than one angle, and seeing them as a whole. This have made me  build good products with the customer in mind, and helped solving complex problems within project and team work.
+My broad experience often helps me see problem scenarios and new solutions as a whole. This have made me  build good products with the customer in mind, and helped solving complex problems within project and team work.
 
 ## Professional Experience
 
