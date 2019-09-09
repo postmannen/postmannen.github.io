@@ -13,19 +13,19 @@ My broad experience often helps me see problem scenarios and new solutions as a 
 
 ## Professional Experience
 
-Been working with Data centers, Network, Security, Servers, and Monitoring since 1997, and made the switch to fulltime Development study in 2017.
+Been working with Data centers, Network, Security, Servers, and Monitoring since 1997, and made the switch to fulltime Development in 2017.
 The most recent jobs can be found below.
+
 A full list can be found at my [LinkedIn profile](https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/).
 
-### 2017 - Present, Full time Go Development Study
+### 2017 - Present, Go Development
 
-Making projects that are useful have been essential for me in my study to solve real problems. Since agriculture is a profession I know well, I have centered much of my studying with problems or solutions found there.
+Making projects that are useful are essential for me, and I like to solve real problems. Since agriculture and live production are professions I know well, I have centered much of my working with problems found there.
 Some are mentioned below:
 
 - Lexing and Parsing data.
 - Decoding protocols, and write software to control Drones and IOT.
-- Client/Server, using websockets to call templates from backend.
-- Creating a learning repository with well documented explanations of concepts, and other training exercises.
+- Web services.
 - All my projects are available at [github.com/postmannen](https://github.com/postmannen).
 
 ### 2004 - Present, Self Employee, Freelance
