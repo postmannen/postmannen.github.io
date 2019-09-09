@@ -44,6 +44,34 @@ Some are mentioned below:
 - Scripting/Programming in Perl and JavaScript.
 - Design and implementation of Monitoring platform counting 40k+ monitored services.
 
+### 2012 - 2013, IPsoft, Senior Network Consultant
+
+- Senior Network Consultant.
+- Technical Project Lead.
+- Monitoring and Automation.
+
+### 2008 - 2012, Steria AS, Senior Network Consultant
+
+- Network Design, implementation and management.
+- Implementation projects of large and smaller customers: Planning, migration, customer relationship.
+- Maintenance of Steria's datacenter's based on Cisco hardware.
+- Network monitoring based on Centreon/Nagios.
+
+### 2004 - 2008, Nortura, Senior Network Consultant
+
+- Responsible for Lan/Wan, Security.
+- Maintainance and implementation of Linux and Windows servers.
+- System monitoring based on Centreon/Nagios and other monitoring tools available on the Linux platform.
+
+### 2004 - 2004, Systeam, System Consultant
+
+- Maintainance of customer network, servers and computers.
+
+### 1997 - 2003, Telenor Mobil, System Consultant
+
+- Network and server maintenance.
+- Customer support.
+
 ## Programming Languages
 
 ### Go/Golang 2017 - Present
