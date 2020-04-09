@@ -35,6 +35,7 @@ Some are mentioned below:
 - Network and server monitoring.
 - Network lan / wan & security.
 - Linux systems.
+- IOT
 
 ### 2013 - 2017, Datametrix AS, Senior Network Consultant
 
@@ -76,7 +77,7 @@ Some are mentioned below:
 
 ### Go/Golang 2017 - Present
 
-- Focus on writing good, documented, and idiomatic code.
+- Focus on writing good and documented code.
 - Understanding the details of how the different elements in the language work, and are ment to be used.
 
 ### Other languages
@@ -85,7 +86,7 @@ Some are mentioned below:
 
 ## Technical Experience
 
-I like to know how solutions and technology work as a whole.  Other areas where i have good experience are:
+I like to know how solutions, technology and the value chain work as a whole.  Other areas where i have good experience are:
 
 - Operating systems with services: Linux and Windows.
 - Monitoring systems: Nagios/Centreon.
@@ -101,14 +102,14 @@ I like to know how solutions and technology work as a whole.  Other areas where 
 
 ### Things I plan to look more into in the future
 
-- Machine Learning.
+- Use of Go with embedded devices and micro controllers.
 - Read and analyze Network Data with Go.
 
 ## Education
 
 ### 1991-1995, Electronics, Certificate Of Apprenticeship
 
-- 1991-1993 Electronics, Computer Technical/Hardware, Micro controllers, Pascal, ASM, Audio/Video.
+- 1991-1995 Electronics, Computer Technical/Hardware, Micro controllers, Pascal, ASM, Audio/Video.
 
 ## Languages
 
