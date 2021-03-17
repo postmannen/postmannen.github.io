@@ -7,13 +7,16 @@ Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com
 ## Summary
 
 A creative technophile with a great passion for learning new things. My interests ranging from Programming, IT, Psychology, Economy, Art, Guitar, Piano, Electronics, Hydraulics, Farming..and more.
-In 2017 I decided to add Go Developer to that list.
+In 2017 I decided to add Go Development to that list.
 
 My broad experience often helps me see problem scenarios and new solutions as a whole. This have made me  build good products with the customer in mind, and helped solving complex problems within project and team work.
 
 ## Professional Experience
 
 Been working with Data centers, Network, Security, Servers, and Monitoring since 1997, and made the switch to fulltime Development in 2017.
+
+Building Edge Cloud solutions from the ground and up.
+
 The most recent jobs can be found below.
 
 A full list can be found at my [LinkedIn profile](https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/).
@@ -25,8 +28,9 @@ Some are mentioned below:
 
 - Lexing and Parsing data.
 - Decoding protocols, and write software to control Drones and IOT.
-- Web services.
+- Network/Server management tools.
 - All my projects are available at [github.com/postmannen](https://github.com/postmannen).
+- Most of my work are opensourced so what I've been doing can be found in the Contribution Activity on my [Github](https://github.com/postmannen) profile.
 
 ### 2004 - Present, Self Employee, Freelance
 
@@ -82,7 +86,7 @@ Some are mentioned below:
 
 ### Other languages
 
-- Familiar with : **JavaScript**, **HTMTL/CSS**, **Perl**
+- Got a fair understanding of code written in C syntax type languages.
 
 ## Technical Experience
 
@@ -92,6 +96,13 @@ I like to know how solutions, technology and the value chain work as a whole.  O
 - Monitoring systems: Nagios/Centreon.
 - Logging systems.
 
+## Industries and verticals
+
+- IT Data Center, Service Provider and Cloud.
+- Telecom.
+- Farming and food production.
+- Shipping.
+
 ### My Side Project
 
 - Use Drones, IOT, and Code to get better control and results in agriculture.
@@ -99,6 +110,14 @@ I like to know how solutions, technology and the value chain work as a whole.  O
 ### Open Source
 
 - All my code and learning material are put available on [Github](https://github.com/postmannen). Hopefully for others to use, learn from, or for detecting issues in the code I have yet to know of.
+
+#### Some more examples below
+
+- Async management of servers/endpoints using Nats where everything is done with passing messages and concurrent. [Steward](https://github.com/RaaLabs/steward)
+
+- Traffic sniffer who lets you know what your computer communicated with, and how much data transfered. [trafficmonitor](https://github.com/RaaLabs/trafficmonitor)
+
+- Driver for Parrot drones. [parrot](https://github.com/postmannen/parrot)
 
 ### Things I plan to look more into in the future
 
