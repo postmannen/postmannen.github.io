@@ -11,6 +11,8 @@ In 2017 I decided to add Go Development to that list.
 
 My broad experience often helps me see problem scenarios and new solutions as a whole. This have made me  build good products with the customer in mind, and helped solving complex problems within project and team work.
 
+I first started programming in Pascal about 3 decades ago, but things happened and my main work became networks and servers, where programming was something I continued to do, but occasionally. In 2017 I decided to switch that around, and do development as the main thing.
+
 ## Professional Experience
 
 Been working with Data centers, Network, Security, Servers, and Monitoring since 1997, and made the switch to fulltime Development in 2017.
@@ -23,10 +25,10 @@ A full list can be found at my [LinkedIn profile](https://www.linkedin.com/in/bj
 
 ### 2017 - Present, Go Development
 
-Making projects that are useful are essential for me, and I like to solve real problems. Since agriculture and live production are professions I know well, I have centered much of my working with problems found there.
-Some are mentioned below:
+I love to solve problems and challenges.
+Some examples are mentioned below:
 
-- Lexing and Parsing data.
+- Inventor and Creator of the Event Driven infrastructure controller [Steward](https://github.com/RaaLabs/steward) for [RaaLabs](https://raalabs.com) that makes it possible to have full control over your infrastructure both in the cloud as well as on the ships sailing the sea.
 - Decoding protocols, and write software to control Drones and IOT.
 - Network/Server management tools.
 - All my projects are available at [github.com/postmannen](https://github.com/postmannen).
@@ -77,23 +79,12 @@ Some are mentioned below:
 - Network and server maintenance.
 - Customer support.
 
-## Programming Languages
-
-### Go/Golang 2017 - Present
-
-- Focus on writing good and documented code.
-- Understanding the details of how the different elements in the language work, and are ment to be used.
-
-### Other languages
-
-- Got a fair understanding of code written in C syntax type languages.
-
 ## Technical Experience
 
 I like to know how solutions, technology and the value chain work as a whole.  Other areas where i have good experience are:
 
 - Operating systems with services: Linux and Windows.
-- Monitoring systems: Nagios/Centreon.
+- Monitoring systems.
 - Logging systems.
 
 ## Industries and verticals
