@@ -34,6 +34,11 @@ Some examples are mentioned below:
 - All my projects are available at [github.com/postmannen](https://github.com/postmannen).
 - Most of my work are opensourced so what I've been doing can be found in the Contribution Activity on my [Github](https://github.com/postmannen) profile.
 
+### Jan 2020 - Jun 2023 Raa Labs, Contract
+
+Building Cloud on the Edge:
+- Build an Edge Cloud infrastructure/platform from the ground and up for ships sailing around the globe.
+
 ### 2004 - Present, Self Employee, Freelance
 
 - Go / Golang Development.
