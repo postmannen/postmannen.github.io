@@ -2,7 +2,7 @@
 
 Heliveien 945, 1820 Spydeberg, Norway  
 Phone: +47 90516604  
-Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com/erter1) | github : [github.com/postmannen](https://github.com/postmannen)
+Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com/erter1) | github : [github.com/postmannen](https://github.com/postmannen) | linkedin : [[linkedin](https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/)](https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/)
 
 ## Summary
 
@@ -23,21 +23,26 @@ The most recent jobs can be found below.
 
 A full list can be found at my [LinkedIn profile](https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/).
 
-### 2017 - Present, Go Development
+- Creating tools to handle both server and network infrastructure.
+- All of my private projects, and most of my work related projects are opensourced so what I've been doing can be found in my Github profile here [Github](https://github.com/postmannen) profile.
 
-I love to solve problems and challenges.
-Some examples are mentioned below:
+### Jul 2023 - Present, Selfstudy eBPF.
 
-- Inventor and Creator of the Event Driven infrastructure controller [Steward](https://github.com/RaaLabs/steward) for [RaaLabs](https://raalabs.com) that makes it possible to have full control over your infrastructure both in the cloud as well as on the ships sailing the sea.
-- Decoding protocols, and write software to control Drones and IOT.
-- Network/Server management tools.
-- All my projects are available at [github.com/postmannen](https://github.com/postmannen).
-- Most of my work are opensourced so what I've been doing can be found in the Contribution Activity on my [Github](https://github.com/postmannen) profile.
+- Learning more about eBPF, tracing, handling network traffic on Linux servers.
+- C Programming, and also some Python :)
 
 ### Jan 2020 - Jun 2023 Raa Labs, Contract
 
 Building Cloud on the Edge:
+
 - Build an Edge Cloud infrastructure/platform from the ground and up for ships sailing around the globe.
+- Create an event driven infrastructure controller, [Steward](https://github.com/postmannen/steward) for [RaaLabs](https://raalabs.com)
+- K3s.
+- Created various tools and automation services, where most of the services with an MIT license can be found at [Raalabs's Github](https://github.com/raalabs)
+
+### 2017 - 2019, Study programming.
+
+- Go, Software Architecture, and more.
 
 ### 2004 - Present, Self Employee, Freelance
 
