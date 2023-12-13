@@ -9,8 +9,6 @@ Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com
 A tech-savvy individual with a passion for learning new things and exploring diverse fields, including programming, IT, psychology, economy, art, music, electronics, hydraulics, farming, and more. In 2017, I decided to focus on Go development as the primary area of expertise. My broad experience allows me to
 approach problems from various angles, ensuring successful product development and effective resolution of complex issues within project teams.
 
-I first started programming in Pascal about 3 decades ago, but things happened and my main work became networks and servers, where programming was something I continued to do, but occasionally. In 2017 I decided to switch that around, and do development as the main thing.
-
 ## Professional Experience
 
 Been working with Data centers, Network, Security, Servers, and Monitoring since 1997, and made the switch to fulltime Development in 2017.
