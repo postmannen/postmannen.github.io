@@ -2,14 +2,12 @@
 
 Heliveien 945, 1820 Spydeberg, Norway  
 Phone: +47 90516604  
-Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com/erter1) | github : [github.com/postmannen](https://github.com/postmannen) | linkedin : [[linkedin](https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/)](https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/)
+Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com/erter1) | github : [github.com/postmannen](https://github.com/postmannen) | linkedin : [https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/](https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/)
 
 ## Summary
 
-A creative technophile with a great passion for learning new things. My interests ranging from Programming, IT, Psychology, Economy, Art, Guitar, Piano, Electronics, Hydraulics, Farming..and more.
-In 2017 I decided to add Go Development to that list.
-
-My broad experience often helps me see problem scenarios and new solutions as a whole. This have made me  build good products with the customer in mind, and helped solving complex problems within project and team work.
+A tech-savvy individual with a passion for learning new things and exploring diverse fields, including programming, IT, psychology, economy, art, music, electronics, hydraulics, farming, and more. In 2017, I decided to focus on Go development as the primary area of expertise. My broad experience allows me to
+approach problems from various angles, ensuring successful product development and effective resolution of complex issues within project teams.
 
 I first started programming in Pascal about 3 decades ago, but things happened and my main work became networks and servers, where programming was something I continued to do, but occasionally. In 2017 I decided to switch that around, and do development as the main thing.
 
@@ -21,21 +19,15 @@ Building Edge Cloud solutions from the ground and up.
 
 The most recent jobs can be found below.
 
-A full list can be found at my [LinkedIn profile](https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/).
-
-- Creating tools to handle both server and network infrastructure.
-- All of my private projects, and most of my work related projects are opensourced so what I've been doing can be found in my Github profile here [Github](https://github.com/postmannen) profile.
-
 ### Jul 2023 - Present, Selfstudy eBPF.
 
-- Learning more about eBPF, tracing, handling network traffic on Linux servers.
-- C Programming, and also some Python :)
+- Study eBPF, tracing, handling network traffic on Linux servers.
+- AI in the form of llama.
+- Security.
 
 ### Jan 2020 - Jun 2023 Raa Labs, Contract
 
-Building Cloud on the Edge:
-
-- Build an Edge Cloud infrastructure/platform from the ground and up for ships sailing around the globe.
+- Build an Edge Cloud infrastructure/platform from the ground up for ships sailing around the globe.
 - Create an event driven infrastructure controller, [Steward](https://github.com/postmannen/steward) for [RaaLabs](https://raalabs.com)
 - K3s.
 - Created various tools and automation services, where most of the services with an MIT license can be found at [Raalabs's Github](https://github.com/raalabs)
@@ -91,7 +83,7 @@ Building Cloud on the Edge:
 
 ## Technical Experience
 
-I like to know how solutions, technology and the value chain work as a whole.  Other areas where i have good experience are:
+I like to know how technology and the value chain work as a whole.  Other areas where i have good experience are:
 
 - Operating systems with services: Linux and Windows.
 - Monitoring systems.
@@ -106,7 +98,7 @@ I like to know how solutions, technology and the value chain work as a whole.  O
 
 ### My Side Project
 
-- Use Drones, IOT, and Code to get better control and results in agriculture.
+- Use Drones, IOT, and Code to get better control and results in agriculture. Writing a driver/controller for Parrot drones from scratch. [parrot driver in Go](https://github.com/postmannen/parrot)
 
 ### Open Source
 
@@ -114,7 +106,7 @@ I like to know how solutions, technology and the value chain work as a whole.  O
 
 #### Some more examples below
 
-- Async management of servers/endpoints using Nats where everything is done with passing messages and concurrent. [Steward](https://github.com/RaaLabs/steward)
+- Async management of servers/endpoints using Nats where everything is done with passing messages and concurrent. [Steward](https://github.com/postmannen/steward)
 
 - Traffic sniffer who lets you know what your computer communicated with, and how much data transfered. [trafficmonitor](https://github.com/RaaLabs/trafficmonitor)
 
