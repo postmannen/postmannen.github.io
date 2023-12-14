@@ -6,20 +6,17 @@ Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com
 
 ## Summary
 
-A tech-savvy individual with a passion for learning new things and exploring diverse fields, including programming, IT, psychology, economy, art, music, electronics, hydraulics, farming, and more. In 2017, I decided to focus on Go development as the primary area of expertise. My broad experience allows me to
-approach problems from various angles, ensuring successful product development and effective resolution of complex issues within project teams.
+A tech-savvy individual with a passion for learning new things and exploring diverse fields, including programming, IT, psychology, economy, art, music, electronics, farming, and more. In 2017, I decided to focus on Go development as the primary area of expertise. My broad experience often enables me to approach problems from multiple perspectives, for successful product development and efficiently resolving of complex issues within projects or independently.
 
 ## Professional Experience
 
 Been working with Data centers, Network, Security, Servers, and Monitoring since 1997, and made the switch to fulltime Development in 2017.
 
-Building Edge Cloud solutions from the ground and up.
+The most recent jobs and activities can be found below.
 
-The most recent jobs can be found below.
+### Jul 2023 - Present, Selfstudy
 
-### Jul 2023 - Present, Selfstudy eBPF.
-
-- Study eBPF, tracing, handling network traffic on Linux servers.
+- eBPF, tracing, handling network traffic on Linux servers.
 - AI in the form of llama.
 - Security.
 
@@ -27,12 +24,12 @@ The most recent jobs can be found below.
 
 - Build an Edge Cloud infrastructure/platform from the ground up for ships sailing around the globe.
 - Create an event driven infrastructure controller, [Steward](https://github.com/postmannen/steward) for [RaaLabs](https://raalabs.com)
-- K3s.
-- Created various tools and automation services, where most of the services with an MIT license can be found at [Raalabs's Github](https://github.com/raalabs)
+- Kubernetes on the Edge with K3s.
+- Created various tools and automation services, where most are opensourced with an MIT license and can be found at [Raalabs's Github](https://github.com/raalabs)
 
 ### 2017 - 2019, Study programming.
 
-- Go, Software Architecture, and more.
+- Go, Software Architecture.
 
 ### 2004 - Present, Self Employee, Freelance
 
@@ -45,6 +42,7 @@ The most recent jobs can be found below.
 
 ### 2013 - 2017, Datametrix AS, Senior Network Consultant
 
+- Building a cloud platform from scratch for the Norwegian market
 - Network/Security architecture done with Cisco, Checkpoint and F5 on Datametrix's Cloud provider network.
 - Network and services monitoring based on Centreon/Nagios.
 - Automation and orchestration of cloud services
@@ -77,7 +75,7 @@ The most recent jobs can be found below.
 ### 1997 - 2003, Telenor Mobil, System Consultant
 
 - Network and server maintenance.
-- Customer support.
+- 2nd line Customer support.
 
 ## Technical Experience
 
@@ -96,19 +94,21 @@ I like to know how technology and the value chain work as a whole.  Other areas 
 
 ### My Side Project
 
-- Use Drones, IOT, and Code to get better control and results in agriculture. Writing a driver/controller for Parrot drones from scratch. [parrot driver in Go](https://github.com/postmannen/parrot)
+- I find great interest in Drones, IOT, and Code to get better control and results in agriculture. Based on an idea I have about making drones and AI available for small farmers as well as big, I've been working on a driver/controller for Parrot drones from scratch where the end goal is the help farmers get better insight in the status of the crops on the fields. [parrot driver in Go](https://github.com/postmannen/parrot).
 
 ### Open Source
 
 - All my code and learning material are put available on [Github](https://github.com/postmannen). Hopefully for others to use, learn from, or for detecting issues in the code I have yet to know of.
 
-#### Some more examples below
+#### Some more examples of my projects and ideas are mentioned below
 
 - Async management of servers/endpoints using Nats where everything is done with passing messages and concurrent. [Steward](https://github.com/postmannen/steward)
 
 - Traffic sniffer who lets you know what your computer communicated with, and how much data transfered. [trafficmonitor](https://github.com/RaaLabs/trafficmonitor)
 
 - Driver for Parrot drones. [parrot](https://github.com/postmannen/parrot)
+
+- My repository from when I started with Go, for learning and testing out ideas and concepts, [go-learning](https://github.com/postmannen/go-learning)
 
 ### Things I plan to look more into in the future
 
