@@ -6,7 +6,7 @@ Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com
 
 ## Summary
 
-A tech-savvy individual with a passion for learning new things and exploring diverse fields, including programming, IT, psychology, economy, art, music, electronics, farming, and more. In 2017, I decided to focus on Go development as the primary area of expertise. My broad experience often enables me to approach problems from multiple perspectives, for successful product development and efficiently resolving of complex issues within projects or independently.
+A tech-savvy individual with a passion for learning new things and exploring diverse fields including programming, network, security, linux , psychology, music, electronics, farming, and more. In 2017, I decided to focus on Go development as the primary area of expertise. My broad experience often enables me to approach problems from multiple perspectives, for successful product development and efficiently resolving of complex issues within projects or independently.
 
 ## Professional Experience
 
@@ -27,7 +27,7 @@ The most recent jobs and activities can be found below.
 - Kubernetes on the Edge with K3s.
 - Created various tools and automation services, where most are opensourced with an MIT license and can be found at [Raalabs's Github](https://github.com/raalabs)
 
-### 2017 - 2019, Study programming.
+### 2017 - 2019, Study programming
 
 - Go, Software Architecture.
 
