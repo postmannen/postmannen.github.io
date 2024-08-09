@@ -10,27 +10,31 @@ Jeg er en teknologi interressert person med bred erfaring og som liker å forst�
 
 ## Profesjonell erfaring
 
-Har jobbet med datesenter, nettverk, sikkerhet, servere og overvåkning siden 1997, og byttet retning til programmering i 2017.
+Har jobbet med datesenter, nettverk, sikkerhet, servere og overvåkning siden 1997, og byttet retning til programmering i 2017, hvor Go er hovedspråket, men har også generell innledende forståelse for andre språk som f.eks. Javascript, C.
 
 ## Jobb erfaring
 
-### Jul 2023 - inneværende, selvstudie
+### Jul 2023 - inneværende, selvstudie, og kortere oppdrag
 
-- eBPF, tracing.
+- eBPF, tracing, og håndtering av  nettverkstrafikk på Linux servere.
 - AI i form av llama.
-- Sikkerhet mer i retning av penetrasjonstesting.
+- Sikkerhet.
+- Videre dypdykk i Actor systemer.
+
+### Apr 2023 - Present, Ikomm, Senior Security Engineer
+
+- Designe og bygge Sikkerhets platformer.
 
 ### Jan 2020 - Jun 2023 Raa Labs, Kontrakt
 
-- Build an Edge Cloud infrastructure/platform from the ground up for ships sailing around the globe.
 - Bygge Edge Cloud infrastruktur platform fra scratch for lasteskip i shipping industrien.
 - Utvikle og programmere en event drevet infrastruktur kontroller, [Steward](https://github.com/postmannen/steward) for [RaaLabs](https://raalabs.com)
 - Kubernetes på Edge med Rancher K3s.
-- Utvikle flere større og mindre tjenester for å understøtte automasjon, håndtering av sikkerhet og overvåkning. De fleste prosjektene er tilgjengelige med MIT lisens på [Raalabs's Github](https://github.com/raalabs).
+- Utvikle flere større og mindre tjenester i Go for å understøtte automasjon, håndtering av sikkerhet og overvåkning. De fleste prosjektene er tilgjengelige med MIT lisens på [Raalabs's Github](https://github.com/raalabs).
 
 ### 2017 - 2019, studie programmering
 
-- Go, Software Architecture.
+- Go, Software arkitektur.
 
 ### 2004 - inneværende, selvstendig, freelance
 
@@ -77,8 +81,8 @@ Har jobbet med datesenter, nettverk, sikkerhet, servere og overvåkning siden 19
 
 ### 1997 - 2003, Telenor Mobil, System Consultant
 
-- Network and server maintenance.
-- 2nd line Customer support.
+- Nettverk og server vedlikehold.
+- Andre og tredjelinje support.
 
 ## Industrier og vertikaler
 
@@ -115,7 +119,7 @@ Har jobbet med datesenter, nettverk, sikkerhet, servere og overvåkning siden 19
 
 ### 1991-1995, Elektronikk, Fagbrev
 
-- Electronics, Computer Technical/Hardware, mikrokontrollere, Pascal, Audio/Video.
+- Elektronikk, datateknisk software og hardware, mikrokontrollere, Pascal, Audio/Video.
 
 ## Språk
 

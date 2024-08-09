@@ -14,13 +14,18 @@ Been working with Data centers, Network, Security, Servers, and Monitoring since
 
 The most recent jobs and activities can be found below.
 
-### Jul 2023 - Present, Selfstudy
+### Jul 2023 - Present, selfstudy, and shorter assignments
 
 - eBPF, tracing, handling network traffic on Linux servers.
 - AI in the form of llama.
 - Security.
+- Further dive into Actor systems.
 
-### Jan 2020 - Jun 2023 Raa Labs, Contract
+### Apr 2023 - Present, Ikomm, Senior Security Engineer
+
+- Design and build Security Platforms.
+
+### Jan 2020 - Jun 2023, Raa Labs, Contract
 
 - Build an Edge Cloud infrastructure/platform from the ground up for ships sailing around the globe.
 - Create an event driven infrastructure controller, [Steward](https://github.com/postmannen/steward) for [RaaLabs](https://raalabs.com)
