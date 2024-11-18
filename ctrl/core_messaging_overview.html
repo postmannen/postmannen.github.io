@@ -157,7 +157,7 @@
 <p>All messages processed by a publisher will be written to a log file after they are processed, with all the information needed to recreate the same message if needed, or it can be used for auditing.</p>
 <p>All handling down to the process and message level are handled concurrently. So if there are problems handling one message sent to a node on a subject it will not affect the messages being sent to other nodes, or other messages sent on other subjects to the same host.</p>
 <p>Message types of both <strong>ACK</strong> and <strong>NACK</strong>, so we can decide if we want or don't want an Acknowledge if a message was delivered succesfully.
-Example: We probably want an <strong>ACK</strong> when sending some <strong>REQCLICommand</strong> to be executed, but we don't care for an acknowledge <strong>NACK</strong> when we send an <strong>REQHello</strong> event.
+Example: We probably want an <strong>ACK</strong> when sending some <strong>cliCommand</strong> to be executed, but we don't care for an acknowledge <strong>NACK</strong> when we send an <strong>hello</strong> event.
 If a message are <strong>ACK</strong> or <strong>NACK</strong> type are defined by the value of the <strong>ACKTimeout</strong> for each individual message:</p>
 <ul>
 <li><strong>ACKTimeout</strong> set to 0 will make the message become a <strong>NACK</strong> message.</li>

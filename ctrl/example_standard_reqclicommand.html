@@ -152,16 +152,16 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="reqclicommand"><a class="header" href="#reqclicommand">REQCliCommand</a></h1>
+                        <h1 id="clicommand"><a class="header" href="#clicommand">cliCommand</a></h1>
 <p>In JSON.</p>
 <pre><code class="language-json">[
     {
         "directory":"system",
         "fileName":"system.log",
         "toNodes": ["node2"],
-        "method":"REQCliCommand",
+        "method":"cliCommand",
         "methodArgs": ["bash","-c","rm -rf ./data &amp; systemctl restart ctrl"],
-        "replyMethod":"REQToFileAppend",
+        "replyMethod":"fileAppend",
         "ACKTimeout":30,
         "retries":1,
         "methodTimeout": 30
@@ -172,14 +172,14 @@
 <pre><code class="language-yaml">---
 - toNodes:
     - node2
-  method: REQCliCommand
+  method: cliCommand
   methodArgs:
     - "bash"
     - "-c"
     - |
       rm -rf ./data &amp; systemctl restart ctrl
 
-  replyMethod: REQToFileAppend
+  replyMethod: fileAppend
   ACKTimeout: 30
   retries: 1
   ACKTimeout: 30
@@ -192,13 +192,13 @@
 <pre><code class="language-json">[
     {
         "toNode": "central",
-        "method": "REQCliCommand",
+        "method": "cliCommand",
         "methodArgs": [
             "bash",
             "-c",
             "curl localhost:2111/metrics"
         ],
-        "replyMethod": "REQToConsole",
+        "replyMethod": "console",
         "methodTimeout": 10
     }
 ]
@@ -208,13 +208,13 @@
 <pre><code class="language-json">[
     {
         "toNode": "node1",
-        "method": "REQCliCommandCont",
+        "method": "cliCommandCont",
         "methodArgs": [
             "bash",
             "-c",
             "nc -lk localhost 8888"
         ],
-        "replyMethod": "REQToConsole",
+        "replyMethod": "toConsole",
         "methodTimeout": 10,
     }
 ]
@@ -226,9 +226,9 @@
         "directory":"some/cli/command",
         "fileName":"cli.result",
         "toNode": "node2",
-        "method":"REQnCliCommand",
+        "method":"cliCommand",
         "methodArgs": ["bash","-c","docker ps -a"],
-        "replyMethod":"REQToFileAppend",
+        "replyMethod":"fileAppend",
     }
 ]
 </code></pre>

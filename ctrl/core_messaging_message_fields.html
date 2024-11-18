@@ -162,9 +162,9 @@
 <pre><code class="language-yaml">data : data here in byte format
 </code></pre>
 <p>The actual data in the message. This is the field where we put the returned data in a reply message. The data field are of type []byte.</p>
-<pre><code class="language-yaml">method : REQCliCommand
+<pre><code class="language-yaml">method : cliCommand
 </code></pre>
-<p>What request method type to use, like REQCliCommand, REQHttpGet..</p>
+<p>What request method type to use, like cliCommand, httpGet..</p>
 <pre><code class="language-yaml">  methodArgs :
   - "bash"
   - "-c"
@@ -173,7 +173,7 @@
       echo "and some other test"
 </code></pre>
 <p>Additional arguments that might be needed when executing the method. Can be f.ex. an ip address if it is a tcp sender, or the actual shell command to execute in a cli.</p>
-<pre><code class="language-yaml">replyMethod : REQToFile
+<pre><code class="language-yaml">replyMethod : file
 </code></pre>
 <p>ReplyMethod, is the method to use for the reply message. By default the reply method will be set to log to file, but you can override it setting your own here.</p>
 <pre><code class="language-yaml">  methodArgs :

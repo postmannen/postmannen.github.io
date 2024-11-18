@@ -152,16 +152,16 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="reqclicommandcont"><a class="header" href="#reqclicommandcont">REQCliCommandCont</a></h1>
-<p>The <strong>REQCliCommand</strong> and the <strong>REQCliCommandCont</strong> are the same, except for one thing. <strong>REQCliCommand</strong> will wait until wether the method is finished or the methodTimeout kicks in to send the result as one single message. <strong>REQCliCommand</strong> will when a line is given to  either stdout or stderr create messages with that single line in the data field, and send it back to the node where the message originated.</p>
+                        <h1 id="clicommandcont"><a class="header" href="#clicommandcont">cliCommandCont</a></h1>
+<p>The <strong>cliCommand</strong> and the <strong>cliCommandCont</strong> are the same, except for one thing. <strong>cliCommand</strong> will wait until wether the method is finished or the methodTimeout kicks in to send the result as one single message. <strong>cliCommand</strong> will when a line is given to  either stdout or stderr create messages with that single line in the data field, and send it back to the node where the message originated.</p>
 <pre><code class="language-json">[
     {
         "directory":"some/cli/command",
         "fileName":"cli.result",
         "toNode": "node2",
-        "method":"REQCliCommandCont",
+        "method":"cliCommandCont",
         "methodArgs": ["bash","-c","tcpdump -nni any port 8080"],
-        "replyMethod":"REQToFileAppend",
+        "replyMethod":"fileAppend",
         "methodTimeout":10,
     }
 ]

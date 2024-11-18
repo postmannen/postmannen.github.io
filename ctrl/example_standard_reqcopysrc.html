@@ -152,17 +152,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="reqcopysrc"><a class="header" href="#reqcopysrc">REQCopySrc</a></h1>
+                        <h1 id="copysrc"><a class="header" href="#copysrc">copySrc</a></h1>
 <p>Copy a file from one node to another node.</p>
 <pre><code class="language-json">[
     {
         "directory": "copy",
         "fileName": "copy.log",
         "toNodes": ["central"],
-        "method":"REQCopySrc",
+        "method":"copySrc",
         "methodArgs": ["./testbinary","ship1","./testbinary-copied","500000","20","0770"],
         "methodTimeout": 10,
-        "replyMethod":"REQToConsole"
+        "replyMethod":"console"
     }
 ]
 </code></pre>
@@ -179,7 +179,7 @@
 </ol>
 </li>
 </ul>
-<p>To copy from a remote node to the local node, you specify the remote nodeName in the toNode field, and the message will be forwarded to the remote node. The copying request will then be picked up by the remote node's <strong>REQCopySrc</strong> handler, and the copy session will then be handled from the remote node.</p>
+<p>To copy from a remote node to the local node, you specify the remote nodeName in the toNode field, and the message will be forwarded to the remote node. The copying request will then be picked up by the remote node's <strong>copySrc</strong> handler, and the copy session will then be handled from the remote node.</p>
 
                     </main>
 

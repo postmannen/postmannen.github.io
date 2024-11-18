@@ -167,13 +167,13 @@
     {
         "toNode": "local",
         "fromNode": "central",
-        "method": "REQCliCommand",
+        "method": "cliCommand",
         "methodArgs": [
             "bash",
             "-c",
             "curl localhost:2111/metrics"
         ],
-        "replyMethod": "REQToConsole",
+        "replyMethod": "console",
         "methodTimeout": 10
     }
 ]

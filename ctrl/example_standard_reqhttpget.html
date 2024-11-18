@@ -152,16 +152,16 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="reqhttpget"><a class="header" href="#reqhttpget">REQHttpGet</a></h1>
+                        <h1 id="httpget"><a class="header" href="#httpget">httpGet</a></h1>
 <p>In JSON.</p>
 <pre><code class="language-json">[
     {
         "directory": "httpget",
         "fileName": "finn.no.html",
         "toNodes": ["node1","node2"],
-        "method":"REQHttpGet",
+        "method":"httpGet",
         "methodArgs": ["https://finn.no"],
-        "replyMethod":"REQToFile",
+        "replyMethod":"file",
         "ACKTimeout":5,
         "retries":3,
         "methodTimeout": 5
@@ -172,10 +172,10 @@
 <pre><code class="language-yaml">---
 - toNodes:
     - ["node1","node2"]
-  method: REQHttpGet
+  method: httpGet
   methodArgs:
     - "https://finn.no"
-  replyMethod: REQToFile
+  replyMethod: file
   ACKTimeout: 5
   retries: 3
   methodTimeout: 5

@@ -164,9 +164,9 @@
         "directory":"cli_command_test",
         "fileName":"cli_command.result",
         "toNode": "node2",
-        "method":"REQCliCommand",
+        "method":"cliCommand",
         "methodArgs": ["bash","-c","tree"],
-        "replyMethod":"REQCliCommand",
+        "replyMethod":"cliCommand",
         "replyMethodArgs": ["bash", "-c","echo \"{{ctrl_DATA}}\" &gt; apekatt.txt"],
         "replyMethodTimeOut": 10,
         "ACKTimeout":3,
@@ -177,7 +177,7 @@
 </code></pre>
 <p>The above example, with steps explained:</p>
 <ul>
-<li>Send a message from <strong>node1</strong> to <strong>node2</strong> with a Request Method of type REQCliCommand.</li>
+<li>Send a message from <strong>node1</strong> to <strong>node2</strong> with a Request Method of type cliCommand.</li>
 <li>When received at <strong>node2</strong> we execute the Reqest Method with the arguments specified in the methodArgs.</li>
 <li>When the method on <strong>node2</strong> is done the result data of the method run will be stored in the variable {{ctrl_DATA}}. We can then use this variable when we craft the reply message method by embedding it into a new bash command.</li>
 <li>The reply message is then sent back to <strong>node1</strong>, the method will be executed, and all newlines in the result data will be removed, and all the data with the new lines removed will be stored in a file called <code>apekatt.txt</code></li>
@@ -188,9 +188,9 @@
         "directory":"cli_command_test",
         "fileName":"cli_command.result",
         "toNode": "ship2",
-        "method":"REQCliCommand",
+        "method":"cliCommand",
         "methodArgs": ["bash","-c","tree"],
-        "replyMethod":"REQCliCommand",
+        "replyMethod":"cliCommand",
         "replyMethodArgs": ["bash", "-c","cat &lt;&lt;&lt; {{ctrl_DATA}} &gt; hest.txt"],
         "replyMethodTimeOut": 10,
         "ACKTimeout":3,
