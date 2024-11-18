@@ -479,6 +479,137 @@ Setting a</p>
     }
 ]
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="errors"><a class="header" href="#errors">Errors</a></h1>
+<p>Errors happening on <strong>all</strong> nodes will be reported back to the node(s) started with the flag <code>-isCentralErrorLogger</code> set to true, or by using the <code>IS_CENTRAL_ERROR_LOGGER</code> env variable.</p>
+<h2 id="log-level"><a class="header" href="#log-level">Log level</a></h2>
+<p>The log level can also be specified with the <code>LOG_LEVEL</code> env variable. Values are <code>error/info/warning/debug/none</code>.</p>
+<h2 id="debug"><a class="header" href="#debug">Debug</a></h2>
+<p>To get more debug information in the logs printed to STDERR the env variable <code>ENABLE_DEBUG</code> can be set to true. This will not affect the information printed to the log files, only to STDERR.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reqhttpget"><a class="header" href="#reqhttpget">REQHttpGet</a></h1>
+<p>In JSON.</p>
+<pre><code class="language-json">[
+    {
+        "directory": "httpget",
+        "fileName": "finn.no.html",
+        "toNodes": ["node1","node2"],
+        "method":"REQHttpGet",
+        "methodArgs": ["https://finn.no"],
+        "replyMethod":"REQToFile",
+        "ACKTimeout":5,
+        "retries":3,
+        "methodTimeout": 5
+    }
+]
+</code></pre>
+<p>In YAML.</p>
+<pre><code class="language-yaml">---
+- toNodes:
+    - ["node1","node2"]
+  method: REQHttpGet
+  methodArgs:
+    - "https://finn.no"
+  replyMethod: REQToFile
+  ACKTimeout: 5
+  retries: 3
+  methodTimeout: 5
+  directory: httpget
+  fileName: finn.no.html
+</code></pre>
+<p>The result html file of the http get will be written to:</p>
+<ul>
+<li>&lt;data folder&gt;\httpget\node1\finn.no.html</li>
+<li>&lt;data folder&gt;\httpget\node2\finn.no.html</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reqtailfile"><a class="header" href="#reqtailfile">REQTailFile</a></h1>
+<p>In JSON.</p>
+<pre><code class="language-json">[
+    {
+        "directory": "tails",
+        "fileName": "some.log",
+        "toNodes": "node1","node2","node3",
+        "method":"REQTailFile",
+        "methodArgs": ["/var/log/syslog"],
+        "ACKTimeout":5,
+        "retries":3,
+        "methodTimeout": 200
+    }
+]
+</code></pre>
+<p>NB: If no replyMethod are specified, it will default to <strong>REQToFile</strong></p>
+<p>In YAML.</p>
+<pre><code class="language-yaml">---
+- toNodes:
+    - ["node1","node2","node3"]
+  method: REQTailFile
+  methodArgs:
+    - "/var/log/syslog"
+  replyMethod: REQToFile
+  ACKTimeout: 5
+  retries: 3
+  methodTimeout: 5
+  directory: tails
+  fileName: var_log_syslog.log
+</code></pre>
+<p>The above example will tail the syslog file on 3 nodes for 5 seconds, and save the result on the node where the request came from in the local <code>data</code> folder.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reqclicommand"><a class="header" href="#reqclicommand">REQCliCommand</a></h1>
+<p>In JSON.</p>
+<pre><code class="language-json">[
+    {
+        "directory":"system",
+        "fileName":"system.log",
+        "toNodes": ["node2"],
+        "method":"REQCliCommand",
+        "methodArgs": ["bash","-c","rm -rf ./data &amp; systemctl restart ctrl"],
+        "replyMethod":"REQToFileAppend",
+        "ACKTimeout":30,
+        "retries":1,
+        "methodTimeout": 30
+    }
+]
+</code></pre>
+<p>In YAML.</p>
+<pre><code class="language-yaml">---
+- toNodes:
+    - node2
+  method: REQCliCommand
+  methodArgs:
+    - "bash"
+    - "-c"
+    - |
+      rm -rf ./data &amp; systemctl restart ctrl
+
+  replyMethod: REQToFileAppend
+  ACKTimeout: 30
+  retries: 1
+  ACKTimeout: 30
+  directory: system
+  fileName: system.log
+</code></pre>
+<p>Will send a message to node2 to delete the ctrl data folder, and then restart ctrl. The end result will be appended to the specified file on the node where the request originated.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="send-more-messages"><a class="header" href="#send-more-messages">Send more messages</a></h1>
+<pre><code class="language-json">[
+    {
+        "directory":"cli-command-executed-result",
+        "fileName": "some.log",
+        "toNode": "ship1",
+        "method":"REQCliCommand",
+        "methodArgs": ["bash","-c","sleep 3 &amp; tree ./"],
+        "ACKTimeout":10,
+        "retries":3,
+        "methodTimeout": 4
+    },
+    {
+        "directory":"cli-command-executed-result",
+        "fileName": "some.log",
+        "toNode": "ship2",
+        "method":"REQCliCommand",
+        "methodArgs": ["bash","-c","sleep 3 &amp; tree ./"],
+        "ACKTimeout":10,
+        "retries":3,
+        "methodTimeout": 4
+    }
+]
+</code></pre>
 
                     </main>
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>{{ctrl_DATA}} variable - ctrl</title>
+        <title>Errors - ctrl</title>
 
 
         <!-- Custom HTML head -->
@@ -152,63 +152,22 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="ctrl_data-variable"><a class="header" href="#ctrl_data-variable">{{ctrl_DATA}} variable</a></h1>
-<p>By using the <code>{{ctrl_DATA}}</code> you can grab the result output of your initial request method, and then use it as input in your reply method.</p>
-<p><strong>NB:</strong> The echo command in the example below will remove new lines from the data. To also keep any new lines we need to put escaped <strong>quotes</strong> around the template variable. Like this:</p>
-<ul>
-<li><code>\"{{ctrl_DATA}}\"</code></li>
-</ul>
-<p>Example of usage:</p>
-<pre><code class="language-json">[
-    {
-        "directory":"cli_command_test",
-        "fileName":"cli_command.result",
-        "toNode": "node2",
-        "method":"REQCliCommand",
-        "methodArgs": ["bash","-c","tree"],
-        "replyMethod":"REQCliCommand",
-        "replyMethodArgs": ["bash", "-c","echo \"{{ctrl_DATA}}\" &gt; apekatt.txt"],
-        "replyMethodTimeOut": 10,
-        "ACKTimeout":3,
-        "retries":3,
-        "methodTimeout": 10
-    }
-]
-</code></pre>
-<p>The above example, with steps explained:</p>
-<ul>
-<li>Send a message from <strong>node1</strong> to <strong>node2</strong> with a Request Method of type REQCliCommand.</li>
-<li>When received at <strong>node2</strong> we execute the Reqest Method with the arguments specified in the methodArgs.</li>
-<li>When the method on <strong>node2</strong> is done the result data of the method run will be stored in the variable {{ctrl_DATA}}. We can then use this variable when we craft the reply message method by embedding it into a new bash command.</li>
-<li>The reply message is then sent back to <strong>node1</strong>, the method will be executed, and all newlines in the result data will be removed, and all the data with the new lines removed will be stored in a file called <code>apekatt.txt</code></li>
-</ul>
-<p>The same using bash's herestring:</p>
-<pre><code class="language-json">[
-    {
-        "directory":"cli_command_test",
-        "fileName":"cli_command.result",
-        "toNode": "ship2",
-        "method":"REQCliCommand",
-        "methodArgs": ["bash","-c","tree"],
-        "replyMethod":"REQCliCommand",
-        "replyMethodArgs": ["bash", "-c","cat &lt;&lt;&lt; {{ctrl_DATA}} &gt; hest.txt"],
-        "replyMethodTimeOut": 10,
-        "ACKTimeout":3,
-        "retries":3,
-        "methodTimeout": 10
-    }
-]
-</code></pre>
+                        <h1 id="errors"><a class="header" href="#errors">Errors</a></h1>
+<p>Errors happening on <strong>all</strong> nodes will be reported back to the node(s) started with the flag <code>-isCentralErrorLogger</code> set to true, or by using the <code>IS_CENTRAL_ERROR_LOGGER</code> env variable.</p>
+<h2 id="log-level"><a class="header" href="#log-level">Log level</a></h2>
+<p>The log level can also be specified with the <code>LOG_LEVEL</code> env variable. Values are <code>error/info/warning/debug/none</code>.</p>
+<h2 id="debug"><a class="header" href="#debug">Debug</a></h2>
+<p>To get more debug information in the logs printed to STDERR the env variable <code>ENABLE_DEBUG</code> can be set to true. This will not affect the information printed to the log files, only to STDERR.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="core_startup_folder.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="core_messaging_ctrl_DATA.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="core_errors.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="example_standard_reqhttpget.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -218,11 +177,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="core_startup_folder.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="core_messaging_ctrl_DATA.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="core_errors.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="example_standard_reqhttpget.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
