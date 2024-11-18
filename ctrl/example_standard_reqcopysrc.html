@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Send more messages - ctrl</title>
+        <title>REQCopySrc - ctrl</title>
 
 
         <!-- Custom HTML head -->
@@ -152,39 +152,46 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="send-more-messages"><a class="header" href="#send-more-messages">Send more messages</a></h1>
+                        <h1 id="reqcopysrc"><a class="header" href="#reqcopysrc">REQCopySrc</a></h1>
+<p>Copy a file from one node to another node.</p>
 <pre><code class="language-json">[
     {
-        "directory":"cli-command-executed-result",
-        "fileName": "some.log",
-        "toNode": "ship1",
-        "method":"REQCliCommand",
-        "methodArgs": ["bash","-c","sleep 3 &amp; tree ./"],
-        "ACKTimeout":10,
-        "retries":3,
-        "methodTimeout": 4
-    },
-    {
-        "directory":"cli-command-executed-result",
-        "fileName": "some.log",
-        "toNode": "ship2",
-        "method":"REQCliCommand",
-        "methodArgs": ["bash","-c","sleep 3 &amp; tree ./"],
-        "ACKTimeout":10,
-        "retries":3,
-        "methodTimeout": 4
+        "directory": "copy",
+        "fileName": "copy.log",
+        "toNodes": ["central"],
+        "method":"REQCopySrc",
+        "methodArgs": ["./testbinary","ship1","./testbinary-copied","500000","20","0770"],
+        "methodTimeout": 10,
+        "replyMethod":"REQToConsole"
     }
 ]
 </code></pre>
+<ul>
+<li>toNode/toNodes, specifies what node to send the request to, and which also contains the src file to copy.</li>
+<li>methodArgs, are split into several fields, where each field specifies:
+<ol>
+<li>SrcFullPath, specifies the full path including the name of the file to copy.</li>
+<li>DstNode, the destination node to copy the file to.</li>
+<li>DstFullPath, the full path including the name of the destination file. The filename can be different than the original name.</li>
+<li>SplitChunkSize, the size of the chunks to split the file into for transfer.</li>
+<li>MaxTotalCopyTime, specifies the maximum allowed time the complete copy should take. Make sure you set this long enough to allow the transfer to complete.</li>
+<li>FolderPermission, the permissions to set on the destination folder if it does not exist and needs to be created. Will default to 0755 if no value is set.</li>
+</ol>
+</li>
+</ul>
+<p>To copy from a remote node to the local node, you specify the remote nodeName in the toNode field, and the message will be forwarded to the remote node. The copying request will then be picked up by the remote node's <strong>REQCopySrc</strong> handler, and the copy session will then be handled from the remote node.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="example_standard_reqcopysrc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="example_standard_reqclicommandcont.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="example_standard_send_more_messages.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -192,10 +199,13 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="example_standard_reqcopysrc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="example_standard_reqclicommandcont.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="example_standard_send_more_messages.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>

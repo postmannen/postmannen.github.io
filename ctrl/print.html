@@ -388,7 +388,24 @@ Setting a</p>
 <pre><code class="language-yaml">schedule : [2,5]
 </code></pre>
 <p>Schedule are used for scheduling the method of messages to be executed several times. The schedule is defined as an array of two values, where the first value defines how often the schedule should trigger a run in seconds, and the second value is for how long the schedule are allowed to run in seconds total. <code>[2,5]</code> will trigger the method to be executed again every 2 seconds, but when a total time of 5 seconds have passed it will stop scheduling.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="nats-timeouts"><a class="header" href="#nats-timeouts">Nats timeouts</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="request-methods"><a class="header" href="#request-methods">Request Methods</a></h1>
+<div class="table-wrapper"><table><thead><tr><th>Method name</th><th>Description</th></tr></thead><tbody>
+<tr><td>REQOpProcessList</td><td>Get a list of the running processes</td></tr>
+<tr><td>REQOpProcessStart</td><td>Start up a process</td></tr>
+<tr><td>REQOpProcessStop</td><td>Stop a process</td></tr>
+<tr><td>REQCliCommand</td><td>Will run the command given, and return the stdout output of the command when the command is done</td></tr>
+<tr><td>REQCliCommandCont</td><td>Will run the command given, and return the stdout output of the command continously while the command runs</td></tr>
+<tr><td>REQTailFile</td><td>Tail log files on some node, and get the result for each new line read sent back in a reply message</td></tr>
+<tr><td>REQHttpGet</td><td>Scrape web url, and get the html sent back in a reply message</td></tr>
+<tr><td>REQHello</td><td>Send Hello messages</td></tr>
+<tr><td>REQCopySrc</td><td>Copy a file from one node to another node</td></tr>
+<tr><td>REQErrorLog</td><td>Method for receiving error logs for Central error logger</td></tr>
+<tr><td>REQNone</td><td>Don't send a reply message</td></tr>
+<tr><td>REQToConsole</td><td>Print to stdout or stderr</td></tr>
+<tr><td>REQToFileAppend</td><td>Append to file, can also write to unix sockets</td></tr>
+<tr><td>REQToFile</td><td>Write to file, can also write to unix sockets</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="nats-timeouts"><a class="header" href="#nats-timeouts">Nats timeouts</a></h1>
 <p>The various timeouts for the NATS messages can be controlled via an .env file or flags.</p>
 <p>If the network media is a high latency like satellite links, it will make sense to adjust the client timeout to reflect the latency</p>
 <pre><code class="language-text">  -natsConnOptTimeout int
@@ -586,6 +603,94 @@ Setting a</p>
   fileName: system.log
 </code></pre>
 <p>Will send a message to node2 to delete the ctrl data folder, and then restart ctrl. The end result will be appended to the specified file on the node where the request originated.</p>
+<h2 id="more-examples"><a class="header" href="#more-examples">More examples</a></h2>
+<h3 id="get-the-prometheus-metrics-of-the-central-server"><a class="header" href="#get-the-prometheus-metrics-of-the-central-server">Get the prometheus metrics of the central server</a></h3>
+<pre><code class="language-json">[
+    {
+        "toNode": "central",
+        "method": "REQCliCommand",
+        "methodArgs": [
+            "bash",
+            "-c",
+            "curl localhost:2111/metrics"
+        ],
+        "replyMethod": "REQToConsole",
+        "methodTimeout": 10
+    }
+]
+
+</code></pre>
+<h3 id="start-up-a-tcp-listener-for-number-of-seconds"><a class="header" href="#start-up-a-tcp-listener-for-number-of-seconds">Start up a tcp listener for number of seconds</a></h3>
+<pre><code class="language-json">[
+    {
+        "toNode": "node1",
+        "method": "REQCliCommandCont",
+        "methodArgs": [
+            "bash",
+            "-c",
+            "nc -lk localhost 8888"
+        ],
+        "replyMethod": "REQToConsole",
+        "methodTimeout": 10,
+    }
+]
+</code></pre>
+<p>The netcat tcp listener will run for 10 seconds before the method timeout kicks in and ends the process.</p>
+<h3 id="get-the-running-docker-containers-from-a-node"><a class="header" href="#get-the-running-docker-containers-from-a-node">Get the running docker containers from a node</a></h3>
+<pre><code class="language-json">[
+    {
+        "directory":"some/cli/command",
+        "fileName":"cli.result",
+        "toNode": "node2",
+        "method":"REQnCliCommand",
+        "methodArgs": ["bash","-c","docker ps -a"],
+        "replyMethod":"REQToFileAppend",
+    }
+]
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reqclicommandcont"><a class="header" href="#reqclicommandcont">REQCliCommandCont</a></h1>
+<p>The <strong>REQCliCommand</strong> and the <strong>REQCliCommandCont</strong> are the same, except for one thing. <strong>REQCliCommand</strong> will wait until wether the method is finished or the methodTimeout kicks in to send the result as one single message. <strong>REQCliCommand</strong> will when a line is given to  either stdout or stderr create messages with that single line in the data field, and send it back to the node where the message originated.</p>
+<pre><code class="language-json">[
+    {
+        "directory":"some/cli/command",
+        "fileName":"cli.result",
+        "toNode": "node2",
+        "method":"REQCliCommandCont",
+        "methodArgs": ["bash","-c","docker ps -a"],
+        "replyMethod":"REQToFileAppend",
+        "methodTimeout":10,
+    }
+]
+</code></pre>
+<p>Example Will run the command given for 10 seconds (methodTimeout), and return the stdout output of the command continously while the command runs. Uses the methodTimeout to define for how long the command will run.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reqcopysrc"><a class="header" href="#reqcopysrc">REQCopySrc</a></h1>
+<p>Copy a file from one node to another node.</p>
+<pre><code class="language-json">[
+    {
+        "directory": "copy",
+        "fileName": "copy.log",
+        "toNodes": ["central"],
+        "method":"REQCopySrc",
+        "methodArgs": ["./testbinary","ship1","./testbinary-copied","500000","20","0770"],
+        "methodTimeout": 10,
+        "replyMethod":"REQToConsole"
+    }
+]
+</code></pre>
+<ul>
+<li>toNode/toNodes, specifies what node to send the request to, and which also contains the src file to copy.</li>
+<li>methodArgs, are split into several fields, where each field specifies:
+<ol>
+<li>SrcFullPath, specifies the full path including the name of the file to copy.</li>
+<li>DstNode, the destination node to copy the file to.</li>
+<li>DstFullPath, the full path including the name of the destination file. The filename can be different than the original name.</li>
+<li>SplitChunkSize, the size of the chunks to split the file into for transfer.</li>
+<li>MaxTotalCopyTime, specifies the maximum allowed time the complete copy should take. Make sure you set this long enough to allow the transfer to complete.</li>
+<li>FolderPermission, the permissions to set on the destination folder if it does not exist and needs to be created. Will default to 0755 if no value is set.</li>
+</ol>
+</li>
+</ul>
+<p>To copy from a remote node to the local node, you specify the remote nodeName in the toNode field, and the message will be forwarded to the remote node. The copying request will then be picked up by the remote node's <strong>REQCopySrc</strong> handler, and the copy session will then be handled from the remote node.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="send-more-messages"><a class="header" href="#send-more-messages">Send more messages</a></h1>
 <pre><code class="language-json">[
     {

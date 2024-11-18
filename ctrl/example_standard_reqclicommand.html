@@ -187,6 +187,51 @@
   fileName: system.log
 </code></pre>
 <p>Will send a message to node2 to delete the ctrl data folder, and then restart ctrl. The end result will be appended to the specified file on the node where the request originated.</p>
+<h2 id="more-examples"><a class="header" href="#more-examples">More examples</a></h2>
+<h3 id="get-the-prometheus-metrics-of-the-central-server"><a class="header" href="#get-the-prometheus-metrics-of-the-central-server">Get the prometheus metrics of the central server</a></h3>
+<pre><code class="language-json">[
+    {
+        "toNode": "central",
+        "method": "REQCliCommand",
+        "methodArgs": [
+            "bash",
+            "-c",
+            "curl localhost:2111/metrics"
+        ],
+        "replyMethod": "REQToConsole",
+        "methodTimeout": 10
+    }
+]
+
+</code></pre>
+<h3 id="start-up-a-tcp-listener-for-number-of-seconds"><a class="header" href="#start-up-a-tcp-listener-for-number-of-seconds">Start up a tcp listener for number of seconds</a></h3>
+<pre><code class="language-json">[
+    {
+        "toNode": "node1",
+        "method": "REQCliCommandCont",
+        "methodArgs": [
+            "bash",
+            "-c",
+            "nc -lk localhost 8888"
+        ],
+        "replyMethod": "REQToConsole",
+        "methodTimeout": 10,
+    }
+]
+</code></pre>
+<p>The netcat tcp listener will run for 10 seconds before the method timeout kicks in and ends the process.</p>
+<h3 id="get-the-running-docker-containers-from-a-node"><a class="header" href="#get-the-running-docker-containers-from-a-node">Get the running docker containers from a node</a></h3>
+<pre><code class="language-json">[
+    {
+        "directory":"some/cli/command",
+        "fileName":"cli.result",
+        "toNode": "node2",
+        "method":"REQnCliCommand",
+        "methodArgs": ["bash","-c","docker ps -a"],
+        "replyMethod":"REQToFileAppend",
+    }
+]
+</code></pre>
 
                     </main>
 
@@ -196,7 +241,7 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="example_standard_send_more_messages.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="example_standard_reqclicommandcont.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -210,7 +255,7 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="example_standard_send_more_messages.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="example_standard_reqclicommandcont.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

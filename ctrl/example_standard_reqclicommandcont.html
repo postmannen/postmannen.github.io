@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Send more messages - ctrl</title>
+        <title>REQCliCommandCont - ctrl</title>
 
 
         <!-- Custom HTML head -->
@@ -152,39 +152,33 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="send-more-messages"><a class="header" href="#send-more-messages">Send more messages</a></h1>
+                        <h1 id="reqclicommandcont"><a class="header" href="#reqclicommandcont">REQCliCommandCont</a></h1>
+<p>The <strong>REQCliCommand</strong> and the <strong>REQCliCommandCont</strong> are the same, except for one thing. <strong>REQCliCommand</strong> will wait until wether the method is finished or the methodTimeout kicks in to send the result as one single message. <strong>REQCliCommand</strong> will when a line is given to  either stdout or stderr create messages with that single line in the data field, and send it back to the node where the message originated.</p>
 <pre><code class="language-json">[
     {
-        "directory":"cli-command-executed-result",
-        "fileName": "some.log",
-        "toNode": "ship1",
-        "method":"REQCliCommand",
-        "methodArgs": ["bash","-c","sleep 3 &amp; tree ./"],
-        "ACKTimeout":10,
-        "retries":3,
-        "methodTimeout": 4
-    },
-    {
-        "directory":"cli-command-executed-result",
-        "fileName": "some.log",
-        "toNode": "ship2",
-        "method":"REQCliCommand",
-        "methodArgs": ["bash","-c","sleep 3 &amp; tree ./"],
-        "ACKTimeout":10,
-        "retries":3,
-        "methodTimeout": 4
+        "directory":"some/cli/command",
+        "fileName":"cli.result",
+        "toNode": "node2",
+        "method":"REQCliCommandCont",
+        "methodArgs": ["bash","-c","docker ps -a"],
+        "replyMethod":"REQToFileAppend",
+        "methodTimeout":10,
     }
 ]
 </code></pre>
+<p>Example Will run the command given for 10 seconds (methodTimeout), and return the stdout output of the command continously while the command runs. Uses the methodTimeout to define for how long the command will run.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="example_standard_reqcopysrc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="example_standard_reqclicommand.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="example_standard_reqcopysrc.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -192,10 +186,13 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="example_standard_reqcopysrc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="example_standard_reqclicommand.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="example_standard_reqcopysrc.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
