@@ -656,7 +656,7 @@ Setting a</p>
         "fileName":"cli.result",
         "toNode": "node2",
         "method":"REQCliCommandCont",
-        "methodArgs": ["bash","-c","docker ps -a"],
+        "methodArgs": ["bash","-c","tcpdump -nni any port 8080"],
         "replyMethod":"REQToFileAppend",
         "methodTimeout":10,
     }
