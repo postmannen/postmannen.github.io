@@ -165,6 +165,7 @@
 <pre><code class="language-yaml">method : cliCommand
 </code></pre>
 <p>What request method type to use, like cliCommand, httpGet..</p>
+<p>All <a href="./core_request_methods.html">methods</a>.</p>
 <pre><code class="language-yaml">  methodArgs :
   - "bash"
   - "-c"
@@ -206,7 +207,8 @@ Setting a</p>
 <p>The number of retries for trying to resend a message for reply messages.</p>
 <pre><code class="language-yaml">methodTimeout : 10
 </code></pre>
-<p>Timeout for how long a method should be allowed to run before it is timed out.</p>
+<p>Timeout for how long a method should be allowed to run before it is timed out.
+If <code>methodTimeout : -1</code> the method will not time out.</p>
 <pre><code class="language-yaml">replyMethodTimeout : 10
 </code></pre>
 <p>Timeout for how long a method should be allowed to run before it is timed out, but for the reply message.</p>
@@ -232,7 +234,7 @@ Setting a</p>
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="core_request_methods.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="core_messaging_jetstream.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -246,7 +248,7 @@ Setting a</p>
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="core_request_methods.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="core_messaging_jetstream.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

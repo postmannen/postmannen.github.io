@@ -185,7 +185,7 @@ cd testrun
 NODE_NAME="node1"
 BROKER_ADDRESS="127.0.0,1:4444"
 ENABLE_DEBUG=1
-START_PUB_REQ_HELLO=60
+START_PUB_HELLO=60
 IS_CENTRAL_ERROR_LOGGER=0
 EOF
 </code></pre>
@@ -242,7 +242,7 @@ cd node1
 NODE_NAME="node1"
 BROKER_ADDRESS="127.0.0,1:4444"
 ENABLE_DEBUG=1
-START_PUB_REQ_HELLO=60
+START_PUB_HELLO=60
 IS_CENTRAL_ERROR_LOGGER=0
 EOF
 </code></pre>
@@ -330,6 +330,7 @@ img {
 <pre><code class="language-yaml">method : cliCommand
 </code></pre>
 <p>What request method type to use, like cliCommand, httpGet..</p>
+<p>All <a href="./core_request_methods.html">methods</a>.</p>
 <pre><code class="language-yaml">  methodArgs :
   - "bash"
   - "-c"
@@ -371,7 +372,8 @@ Setting a</p>
 <p>The number of retries for trying to resend a message for reply messages.</p>
 <pre><code class="language-yaml">methodTimeout : 10
 </code></pre>
-<p>Timeout for how long a method should be allowed to run before it is timed out.</p>
+<p>Timeout for how long a method should be allowed to run before it is timed out.
+If <code>methodTimeout : -1</code> the method will not time out.</p>
 <pre><code class="language-yaml">replyMethodTimeout : 10
 </code></pre>
 <p>Timeout for how long a method should be allowed to run before it is timed out, but for the reply message.</p>
@@ -388,6 +390,47 @@ Setting a</p>
 <pre><code class="language-yaml">schedule : [2,5]
 </code></pre>
 <p>Schedule are used for scheduling the method of messages to be executed several times. The schedule is defined as an array of two values, where the first value defines how often the schedule should trigger a run in seconds, and the second value is for how long the schedule are allowed to run in seconds total. <code>[2,5]</code> will trigger the method to be executed again every 2 seconds, but when a total time of 5 seconds have passed it will stop scheduling.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="jetstream"><a class="header" href="#jetstream">Jetstream</a></h1>
+<p>ctrl takes benefit of some of the streaming features of NATS Jetstream. In short, Jetstream will keep the state of the message queues on the nats-server, whereas with normal ctrl messaging the state of all the messages are kept on and is the responsibility of the node publishing the message.</p>
+<p>With Jetstream some cool posibilities with ctrl become possible. A couple of examples are:</p>
+<ul>
+<li>Use ctrl in a github runner, and make messages available to be consumed even after the runner have stopped.</li>
+<li>Broadcast message to all nodes.</li>
+</ul>
+<h2 id="general-use"><a class="header" href="#general-use">General use</a></h2>
+<p>To use Jetstream instead of regular NATS messaging, put the <strong>node name</strong> of the node that is supposed to consume the message in the <strong>jetstreamToNode</strong> field.</p>
+<pre><code class="language-yaml">---
+- toNodes:
+    - mynode1
+  jetstreamToNode: mynode1
+  method: cliCommand
+  methodArgs:
+    - /bin/bash
+    - -c
+    - |
+      tree
+  methodTimeout: 3
+  replyMethod: console
+  ACKTimeout: 0
+</code></pre>
+<p>The request will then be published with NATS Jetstream to all nodes registered on the nats-server. The reply with the result will be sent back as a normal NATS message (not Jetstream).</p>
+<h2 id="broadcast"><a class="header" href="#broadcast">Broadcast</a></h2>
+<p>A message can be broadcasted to all nodes by using the value <strong>all</strong> with jetstreamToNode field of the message like the example below.</p>
+<pre><code class="language-yaml">---
+- toNodes:
+    - all
+  jetstreamToNode: all
+  method: cliCommand
+  methodArgs:
+    - /bin/bash
+    - -c
+    - |
+      tree
+  methodTimeout: 3
+  replyMethod: console
+  ACKTimeout: 0
+</code></pre>
+<p>The request will then be published with NATS Jetstream to all nodes registered on the nats-server. The reply with the result will be sent back as a normal NATS message (not Jetstream).</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="request-methods"><a class="header" href="#request-methods">Request Methods</a></h1>
 <div class="table-wrapper"><table><thead><tr><th>Method name</th><th>Description</th></tr></thead><tbody>
 <tr><td>opProcessList</td><td>Get a list of the running processes</td></tr>
