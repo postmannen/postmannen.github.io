@@ -193,6 +193,11 @@
   ACKTimeout: 0
 </code></pre>
 <p>The request will then be published with NATS Jetstream to all nodes registered on the nats-server. The reply with the result will be sent back as a normal NATS message (not Jetstream).</p>
+<h2 id="specify-more-subjects-to-consume-with-streams"><a class="header" href="#specify-more-subjects-to-consume-with-streams">Specify more subjects to consume with streams</a></h2>
+<p>More subject can be specified by using the flag <code>jetstreamsConsume</code> or env variable <code>JETSTREAMS_CONSUME</code> .</p>
+<p>Example:</p>
+<pre><code class="language-env">JETSTREAMS_CONSUME=updates,restart,indreostfold
+</code></pre>
 
                     </main>
 

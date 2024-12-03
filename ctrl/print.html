@@ -431,6 +431,11 @@ If <code>methodTimeout : -1</code> the method will not time out.</p>
   ACKTimeout: 0
 </code></pre>
 <p>The request will then be published with NATS Jetstream to all nodes registered on the nats-server. The reply with the result will be sent back as a normal NATS message (not Jetstream).</p>
+<h2 id="specify-more-subjects-to-consume-with-streams"><a class="header" href="#specify-more-subjects-to-consume-with-streams">Specify more subjects to consume with streams</a></h2>
+<p>More subject can be specified by using the flag <code>jetstreamsConsume</code> or env variable <code>JETSTREAMS_CONSUME</code> .</p>
+<p>Example:</p>
+<pre><code class="language-env">JETSTREAMS_CONSUME=updates,restart,indreostfold
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="request-methods"><a class="header" href="#request-methods">Request Methods</a></h1>
 <div class="table-wrapper"><table><thead><tr><th>Method name</th><th>Description</th></tr></thead><tbody>
 <tr><td>opProcessList</td><td>Get a list of the running processes</td></tr>
@@ -539,6 +544,24 @@ If <code>methodTimeout : -1</code> the method will not time out.</p>
     }
 ]
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="message-methodargs-variables"><a class="header" href="#message-methodargs-variables">Message methodArgs variables</a></h1>
+<h2 id="ctrl_file"><a class="header" href="#ctrl_file">{{CTRL_FILE}}</a></h2>
+<p>Read a local text file, and embed the content of the file into the methodArgs.</p>
+<pre><code class="language-yaml">---
+- toNodes:
+    - btdev1
+  #jetstreamToNode: btdev1
+  method: cliCommand
+  methodArgs:
+    - /bin/bash
+    - -c
+    - |
+      echo {{CTRL_FILE:/some_directory/source_file.yaml}}&gt;/other_directory/destination_file.yaml
+  methodTimeout: 3
+  replyMethod: console
+  ACKTimeout: 0
+</code></pre>
+<p>The above example will before sending the message read the content of the file <code>/some_directory/source_file.yaml</code>. When the message is received at it's destination node and the cliCommand is executed the content will be written to <code>/other_directory/destination_file.yaml</code>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="errors"><a class="header" href="#errors">Errors</a></h1>
 <p>Errors happening on <strong>all</strong> nodes will be reported back to the node(s) started with the flag <code>-isCentralErrorLogger</code> set to true, or by using the <code>IS_CENTRAL_ERROR_LOGGER</code> env variable.</p>
 <h2 id="log-level"><a class="header" href="#log-level">Log level</a></h2>
