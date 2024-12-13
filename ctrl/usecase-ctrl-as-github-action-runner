@@ -1,0 +1,250 @@
+# ctrl as github action runner
+
+As part of a CI/CD pipeline, or for Content Versioning, or other, can ctrl be run as Github action runner container.
+
+This howto will show the steps involved to get ctrl up and running as Github Action Runner. First we start with setting up a NATS Server, we then setup the local ctrl node **node1**, and then the node that will be started as a Github Action Runner.
+
+## NATS Server
+
+ctrl used NATS as the message broker. The following text will describe how to quickly get up and running with a minimal NATS setup.
+
+## Create NKEY Seed variable for github node, and local node1
+
+NATS uses ED25519 based keys called NKEY. The keys are create by a tool called **nk**. The instructions for how to install it are found here [https://docs.nats.io/using-nats/nats-tools/nk](https://docs.nats.io/using-nats/nats-tools/nk).
+
+The privat key are called **seed** and the public key are called **user**.
+
+To create the keys run the following command after the nk tool is installed.
+
+```bash
+nk -gen user -pubout
+```
+
+The tool will print out two new keys. Where the Seed starts with the letter ` S `, and the User key starts with the letter ` U `.
+
+Run the command two times, and create one pair of keys for the github node, and one pair of keys for your local node.
+
+## Install the NATS Server
+
+For this example we use docker compose to start the NATS server.
+
+On your local computer create a folder to hold the NATS docker compose, and configuration files.
+
+```bash
+mkdir nats && cd nats
+```
+
+create the docker compose file called `nats.yaml`, with the following content.
+
+```yaml
+version: "3"
+
+services:
+  nats:
+    build: .
+    image: nats:latest
+    # -js enables jetstram on the nats server.
+    command: "-c /app/nats-server.conf -D -js"
+    restart: always
+    ports:
+      - "4222:4222"
+    volumes:
+      - ./nats.conf:/app/nats-server.conf
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "10m"
+            max-file: "10"
+```
+
+In the same directory create the nats-server.conf file, with the following content. Replace the place holders for the user keys in the acl with they user keys you created earlier.
+
+```json
+port: 4222
+
+ACL = {
+    publish: {
+            allow: [">"]
+    }
+    subscribe: {
+            allow: [">"]
+    }
+}
+
+authorization: {
+    timeout: "30s"
+    users = [
+        {
+            # github
+            nkey: <REPLACE WITH github user key here>
+            permissions: $ACL
+        },
+        {
+            # node1
+            nkey: <REPLACE WITH seed user key here>
+            permissions: $ACL
+        },
+    ]
+}
+```
+
+## Firewall openings for NATS Server
+
+You will need to open your firewall for inbound `tcp/4222` from the internet.
+
+You can find your public ip address here [https://ipv4.jsonip.com/](https://ipv4.jsonip.com/).
+
+## Local node1 setup
+
+You will need to have docker installed.
+
+Create a local director to hold your configuration
+
+```bash
+mkdir node1/readfolder && cd node1
+```
+
+Create a **.env** file with the following content:
+
+```config
+NODE_NAME=node1
+BROKER_ADDRESS=<REPLACE WITH public ip for nats server>:4222
+NKEY_SEED=<REPLACE WITH seed for node1>
+LOG_LEVEL=debug
+START_PUB_HELLO=600
+```
+
+Start the node with:
+
+```bash
+docker run --env-file=".env" --rm -ti -v $(PWD)/readfolder:/app/readfolder postmannen/ctrl:amd64-0.03
+```
+
+If you're running on a different architecture like arm64 you can build your own docker image from the Dockerfile in the ctrl repo.
+ 
+## Github Action Runner setup
+
+Create a Github repository.
+
+Clone the repository down to local machine or other.
+
+```bash
+git clone <my-repo-name> && cd my-repo-name
+```
+
+Create the github workflows folder
+
+```bash
+mkdir -p .github/workflows
+```
+
+Create a `workflow.yaml` in the new directory with the following content.
+
+```yaml
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+
+jobs:
+  send-message:
+    name: send-message
+    runs-on: ubuntu-latest
+
+    services:
+      ctrl:
+        image: postmannen/ctrl:amd64-0.03
+        env:
+          NKEY_SEED: ${{ secrets.SEED }}
+          NODE_NAME: "github"
+          BROKER_ADDRESS: "<REPLACE WITH ip address of the NATS broker here>:4222"
+          ENABLE_KEY_UPDATES: 0
+          ENABLE_ACL_UPDATES: 0
+        volumes:
+          # mount the readfolder where we put the message to send.
+          - ${{ github.workspace }}/readfolder:/app/readfolder
+          # mount the files folder from the repo to get the file
+          # to inject into the message.
+          - ${{ github.workspace }}/files:/app/files
+        options: --name ctrl
+
+    steps:
+      # When the container was started the repo was not yeat available since it was not
+      # the workspace at that time. We want to make the /files mount to point to the
+      # folder in the repo. Checkout the git repo, and restart the docker container so
+      # it will mount the directories from the repo which now is the current github.workspace.
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: restart docker
+        uses: docker://docker
+        with:
+          args: docker restart ctrl
+      - run: sudo chmod 777 ${{ github.workspace }}/readfolder
+      - run: sleep 3
+      # Send the message by moving it to the readfolder.
+      - run: mv ${{ github.workspace }}/message.yaml ${{ github.workspace }}/readfolder
+      - run: >
+          sleep 5 && tree
+```
+
+In your repository, go to **Settings->Secrets And Variables->Actions** and press **New Repository Secret**. Give the new secret the name **SEED**, and put the content of the seed into **Secret**. This is the seed that we referenced earlier in the github action workflow.
+
+## Send a message by updating the github repository
+
+We want to send a message from the Github Action to node1, so we need to specify the content of the message to use.
+
+In the root folder of the github folder create a **message.yaml** file, and fill in the following content:
+
+```yaml
+---
+- toNodes:
+    - node1
+  method: cliCommand
+  methodArgs:
+    - "bash" # Change from bash to ash for alpine containers
+    - "-c"
+    - |
+      echo '{{CTRL_FILE:./files/file.txt}}'>file.txt
+
+  replyMethod: none
+  ACKTimeout: 0
+```
+
+The message references a file to use with the cli command found in the `files` folder. So we need to create that.
+
+From the repository folder run:
+
+```bash
+mkdir -p files
+echo "some cool text to put as file content.........." > files/file.txt
+```
+
+The message will run a shell/cli command on node1 at delivery. The shell command will use the content of the file located at `<repo>/files/file.txt`, and create a file called **file.txt** in the ctrl working directory on **node1**.
+
+## Update the repository and send message with command
+
+Commit the changes of the repository. If you check the **Actions** section of the new repo you should see that a an action have started.
+
+When the action is done, you should have received a file called **file.txt** in the ctrl working directory on **node1**, with the content you provided in **text.txt**.
+
+## Other cool things you can do ... like deploy kubernetes manifests
+
+Replace the the bash command specified in the method arguments with a kubetctl command like this:
+
+```yaml
+---
+- toNodes:
+    - node1
+  method: cliCommand
+  methodArgs:
+    - "bash" # Change from bash to ash for alpine containers
+    - "-c"
+    - |
+      kubectl apply -f '{{CTRL_FILE:./files/mydeployment.yaml}}'
+
+  replyMethod: none
+  ACKTimeout: 0
+```
+
+Create a new file in the `<repo>/files` folder named **mydeployment.yaml**.
+
+Commit the changes to the repo, and the deployment should be executed if you have a kubernetes instance running on **node1**.
