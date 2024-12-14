@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Message jetstream/broadcast - ctrl</title>
+        <title>General information - ctrl</title>
 
 
         <!-- Custom HTML head -->
@@ -155,62 +155,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="jetstream"><a class="header" href="#jetstream">Jetstream</a></h1>
-<p>ctrl takes benefit of some of the streaming features of NATS Jetstream. In short, Jetstream will keep the state of the message queues on the nats-server, whereas with normal ctrl messaging the state of all the messages are kept on and is the responsibility of the node publishing the message.</p>
-<p>With Jetstream some cool posibilities with ctrl become possible. A couple of examples are:</p>
-<ul>
-<li>Use ctrl in a github runner, and make messages available to be consumed even after the runner have stopped.</li>
-<li>Broadcast message to all nodes.</li>
-</ul>
-<h2 id="general-use"><a class="header" href="#general-use">General use</a></h2>
-<p>To use Jetstream instead of regular NATS messaging, put the <strong>node name</strong> of the node that is supposed to consume the message in the <strong>jetstreamToNode</strong> field.</p>
-<pre><code class="language-yaml">---
-- toNodes:
-    - mynode1
-  jetstreamToNode: mynode1
-  method: cliCommand
-  methodArgs:
-    - /bin/bash
-    - -c
-    - |
-      tree
-  methodTimeout: 3
-  replyMethod: console
-  ACKTimeout: 0
-</code></pre>
-<p>The request will then be published with NATS Jetstream to all nodes registered on the nats-server. The reply with the result will be sent back as a normal NATS message (not Jetstream).</p>
-<h2 id="broadcast"><a class="header" href="#broadcast">Broadcast</a></h2>
-<p>A message can be broadcasted to all nodes by using the value <strong>all</strong> with jetstreamToNode field of the message like the example below.</p>
-<pre><code class="language-yaml">---
-- toNodes:
-    - all
-  jetstreamToNode: all
-  method: cliCommand
-  methodArgs:
-    - /bin/bash
-    - -c
-    - |
-      tree
-  methodTimeout: 3
-  replyMethod: console
-  ACKTimeout: 0
-</code></pre>
-<p>The request will then be published with NATS Jetstream to all nodes registered on the nats-server. The reply with the result will be sent back as a normal NATS message (not Jetstream).</p>
-<h2 id="specify-more-subjects-to-consume-with-streams"><a class="header" href="#specify-more-subjects-to-consume-with-streams">Specify more subjects to consume with streams</a></h2>
-<p>More subject can be specified by using the flag <code>jetstreamsConsume</code> or env variable <code>JETSTREAMS_CONSUME</code> .</p>
-<p>Example:</p>
-<pre><code class="language-env">JETSTREAMS_CONSUME=updates,restart,indreostfold
-</code></pre>
+                        <h1 id="general-information"><a class="header" href="#general-information">General information</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="core_messaging_message_fields.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="introduction.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="core_request_methods.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="user_guide_install_docker.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -220,11 +175,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="core_messaging_message_fields.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="introduction.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="core_request_methods.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="user_guide_install_docker.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

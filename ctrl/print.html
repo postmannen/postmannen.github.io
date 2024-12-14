@@ -127,6 +127,9 @@
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        <a href="https://github.com/postmannen/ctrl" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
 
                     </div>
                 </div>
@@ -167,6 +170,7 @@
 <p>Ctrl is a system control tool that uses NATS as its messaging architecture. It allows you to send commands using request methods which are then executed on servers. If a receiving node is down, messages are retried based on the criteria set in their body. The results of these methods are delivered back to the
 sender.</p>
 <p>Ctrl is designed for concurrent processing and can handle multiple messages independently, even if some processes are slow or fail. It's compatible with various host OSs and systems including cloud containers, Raspberry Pi, and others with an installed operating system. Ctrl supports most major architectures such as x86, amd64, arm64, ppc64, and can run on operating systems like Linux, OSX, Windows.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="general-information"><a class="header" href="#general-information">General information</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="install-with-docker"><a class="header" href="#install-with-docker">Install with docker</a></h1>
 <p>Start up a local nats message broker</p>
 <pre><code class="language-bash">docker run -p 4444:4444 nats -p 4444
