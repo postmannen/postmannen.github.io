@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Messaging - ctrl</title>
+        <title>Install NATS Server - ctrl</title>
 
 
         <!-- Custom HTML head -->
@@ -152,39 +152,85 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="messaging"><a class="header" href="#messaging">Messaging</a></h1>
-<p>The handling of all messages is done by spawning up a process for handling the message in it's own thread. This allows us to keep the state of each <strong>individual message level</strong>  both in regards to ACK's, error handling, send retries, and reruns of methods for a message if the first run was not successful.</p>
-<p>All messages processed by a publisher will be written to a log file after they are processed, with all the information needed to recreate the same message if needed, or it can be used for auditing.</p>
-<p>All handling down to the process and message level are handled concurrently. So if there are problems handling one message sent to a node on a subject it will not affect the messages being sent to other nodes, or other messages sent on other subjects to the same host.</p>
-<p>Message types of both <strong>ACK</strong> and <strong>NACK</strong>, so we can decide if we want or don't want an Acknowledge if a message was delivered succesfully.
-Example: We probably want an <strong>ACK</strong> when sending some <strong>cliCommand</strong> to be executed, but we don't care for an acknowledge <strong>NACK</strong> when we send an <strong>hello</strong> event.
-If a message are <strong>ACK</strong> or <strong>NACK</strong> type are defined by the value of the <strong>ACKTimeout</strong> for each individual message:</p>
-<ul>
-<li><strong>ACKTimeout</strong> set to 0 will make the message become a <strong>NACK</strong> message.</li>
-<li><strong>ACKTimeout</strong> set to &gt;=1 will make the message become an <strong>ACK</strong> message.</li>
-</ul>
-<p>If ACK is expected, and not received, then the message will be retried the amount of time defined in the <strong>retries</strong> field of a message. If numer of retries are reached, and still no ACK received, the message will be discared, and a log message will be sent to the log server.</p>
-<p>To make things easier, all timeouts used for messages can be set with env variables or flags at startup of ctrl. Locally specified timeout directly in a message will override the startup values, and can be used for more granularity when needed.</p>
-<h2 id="example-of-message-flow"><a class="header" href="#example-of-message-flow">Example of message flow:</a></h2>
-<style>
-img {
-  background-color: #FFFFFF;
+                        <h1 id="nats-server-install"><a class="header" href="#nats-server-install">NATS Server install</a></h1>
+<p>ctrl uses NATS as the messagaging backbone. The following text will describe how to quickly get up and running with a minimal NATS setup. For full details of what you can do with nats-server, check out the official docs at <a href="https://docs.nats.io/running-a-nats-service/introduction/installation">https://docs.nats.io/running-a-nats-service/introduction/installation</a></p>
+<h2 id="nkey"><a class="header" href="#nkey">NKEY</a></h2>
+<p>NATS uses ED25519 based keys called NKEY's for Authentication and Authorization. The keys are created by a tool called <strong>nk</strong>. The instructions for how to install it are found here <a href="https://docs.nats.io/using-nats/nats-tools/nk">https://docs.nats.io/using-nats/nats-tools/nk</a>.</p>
+<p>The private key are called <strong>seed</strong>, and the public key are called <strong>user</strong>.</p>
+<p>To create the keys run the following command after the nk tool is installed.</p>
+<pre><code class="language-bash">nk -gen user -pubout
+</code></pre>
+<p>The tool will print out two new keys. Where the private Seed starts with the letter <code>S</code>, and the public User key starts with the letter <code>U</code>.</p>
+<p>The private Seed key are used with each ctrl instance, and are referenced as an ENV, flag, or via file.</p>
+<p>The public User key are used in the nats-server config file for Authentication, to define access lists for what Nats Subjects the ctrl instances should be allowed to send to, or receive from.</p>
+<h2 id="install-the-nats-server"><a class="header" href="#install-the-nats-server">Install the NATS Server</a></h2>
+<p>For this example we use docker compose to start the NATS server.</p>
+<p>On your local computer create a folder to hold the NATS docker compose, and configuration files.</p>
+<pre><code class="language-bash">mkdir nats &amp;&amp; cd nats
+</code></pre>
+<p>create the docker compose file called <code>nats.yaml</code>, with the following content.</p>
+<pre><code class="language-yaml">version: "3"
+
+services:
+  nats:
+    build: .
+    image: nats:latest
+    # -js enables jetstram on the nats server.
+    command: "-c /app/nats-server.conf -D -js"
+    restart: always
+    ports:
+      - "4222:4222"
+    volumes:
+      - ./nats.conf:/app/nats-server.conf
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "10m"
+            max-file: "10"
+</code></pre>
+<p>In the same directory create the nats-server.conf file, with the following content. Replace the placeholders for the user keys in the acl with the user keys you created earlier.</p>
+<pre><code class="language-json">port: 4222
+
+ACL = {
+    publish: {
+            allow: ["&gt;"]
+    }
+    subscribe: {
+            allow: ["&gt;"]
+    }
 }
-</style>
-</head>
-<body>
-<p align="center"><img src="https://github.com/postmannen/ctrl/blob/main/doc/message-flow.svg?raw=true" /></p>
-</body>
+
+authorization: {
+    timeout: "30s"
+    users = [
+        {
+            # github
+            nkey: &lt;REPLACE WITH github user key here&gt;
+            permissions: $ACL
+        },
+        {
+            # node1
+            nkey: &lt;REPLACE WITH seed user key here&gt;
+            permissions: $ACL
+        },
+    ]
+}
+</code></pre>
+<h2 id="firewall-openings-for-nats-server"><a class="header" href="#firewall-openings-for-nats-server">Firewall openings for NATS Server</a></h2>
+<p>You will need to open your firewall for inbound <code>tcp/4222</code> from the internet.</p>
+<p>You can find your public ip address here <a href="https://ipv4.jsonip.com/">https://ipv4.jsonip.com/</a>.</p>
+<h2 id="other"><a class="header" href="#other">Other</a></h2>
+<p>More details like how to use certificates to encrypt the communication can be found in the official nats docs, <a href="https://docs.nats.io/">https://docs.nats.io/</a>.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="install_nats_server.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="user_guide_install_host.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="core_messaging_message_fields.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="core_messaging_overview.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -194,11 +240,11 @@ img {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="install_nats_server.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="user_guide_install_host.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="core_messaging_message_fields.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="core_messaging_overview.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

@@ -153,96 +153,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="ctrl-as-github-action-runner"><a class="header" href="#ctrl-as-github-action-runner">ctrl as github action runner</a></h1>
-<p>As part of a CI/CD pipeline, or for Content Versioning, or other, can ctrl be run as Github action runner container.</p>
+<p>Run ctrl as a docker container in a github workflow. This can for example be as part of a CI/CD pipeline, or for content versioning.</p>
 <p>This howto will show the steps involved to get ctrl up and running as Github Action Runner. First we start with setting up a NATS Server, we then setup the local ctrl node <strong>node1</strong>, and then the node that will be started as a Github Action Runner.</p>
-<h2 id="nats-server"><a class="header" href="#nats-server">NATS Server</a></h2>
-<p>ctrl used NATS as the message broker. The following text will describe how to quickly get up and running with a minimal NATS setup.</p>
-<h2 id="create-nkey-seed-variable-for-github-node-and-local-node1"><a class="header" href="#create-nkey-seed-variable-for-github-node-and-local-node1">Create NKEY Seed variable for github node, and local node1</a></h2>
-<p>NATS uses ED25519 based keys called NKEY. The keys are create by a tool called <strong>nk</strong>. The instructions for how to install it are found here <a href="https://docs.nats.io/using-nats/nats-tools/nk">https://docs.nats.io/using-nats/nats-tools/nk</a>.</p>
-<p>The privat key are called <strong>seed</strong> and the public key are called <strong>user</strong>.</p>
-<p>To create the keys run the following command after the nk tool is installed.</p>
-<pre><code class="language-bash">nk -gen user -pubout
-</code></pre>
-<p>The tool will print out two new keys. Where the Seed starts with the letter <code>S</code>, and the User key starts with the letter <code>U</code>.</p>
-<p>Run the command two times, and create one pair of keys for the github node, and one pair of keys for your local node.</p>
-<h2 id="install-the-nats-server"><a class="header" href="#install-the-nats-server">Install the NATS Server</a></h2>
-<p>For this example we use docker compose to start the NATS server.</p>
-<p>On your local computer create a folder to hold the NATS docker compose, and configuration files.</p>
-<pre><code class="language-bash">mkdir nats &amp;&amp; cd nats
-</code></pre>
-<p>create the docker compose file called <code>nats.yaml</code>, with the following content.</p>
-<pre><code class="language-yaml">version: "3"
-
-services:
-  nats:
-    build: .
-    image: nats:latest
-    # -js enables jetstram on the nats server.
-    command: "-c /app/nats-server.conf -D -js"
-    restart: always
-    ports:
-      - "4222:4222"
-    volumes:
-      - ./nats.conf:/app/nats-server.conf
-    logging:
-        driver: "json-file"
-        options:
-            max-size: "10m"
-            max-file: "10"
-</code></pre>
-<p>In the same directory create the nats-server.conf file, with the following content. Replace the place holders for the user keys in the acl with they user keys you created earlier.</p>
-<pre><code class="language-json">port: 4222
-
-ACL = {
-    publish: {
-            allow: ["&gt;"]
-    }
-    subscribe: {
-            allow: ["&gt;"]
-    }
-}
-
-authorization: {
-    timeout: "30s"
-    users = [
-        {
-            # github
-            nkey: &lt;REPLACE WITH github user key here&gt;
-            permissions: $ACL
-        },
-        {
-            # node1
-            nkey: &lt;REPLACE WITH seed user key here&gt;
-            permissions: $ACL
-        },
-    ]
-}
-</code></pre>
-<h2 id="firewall-openings-for-nats-server"><a class="header" href="#firewall-openings-for-nats-server">Firewall openings for NATS Server</a></h2>
-<p>You will need to open your firewall for inbound <code>tcp/4222</code> from the internet.</p>
-<p>You can find your public ip address here <a href="https://ipv4.jsonip.com/">https://ipv4.jsonip.com/</a>.</p>
-<h2 id="local-node1-setup"><a class="header" href="#local-node1-setup">Local node1 setup</a></h2>
-<p>You will need to have docker installed.</p>
-<p>Create a local director to hold your configuration</p>
-<pre><code class="language-bash">mkdir node1/readfolder &amp;&amp; cd node1
-</code></pre>
-<p>Create a <strong>.env</strong> file with the following content:</p>
-<pre><code class="language-config">NODE_NAME=node1
-BROKER_ADDRESS=&lt;REPLACE WITH public ip for nats server&gt;:4222
-NKEY_SEED=&lt;REPLACE WITH seed for node1&gt;
-LOG_LEVEL=debug
-START_PUB_HELLO=600
-</code></pre>
-<p>Start the node with:</p>
-<pre><code class="language-bash">docker run --env-file=".env" --rm -ti -v $(PWD)/readfolder:/app/readfolder postmannen/ctrl:amd64-0.03
-</code></pre>
-<p>If you're running on a different architecture like arm64 you can build your own docker image from the Dockerfile in the ctrl repo.</p>
+<p>This howto assumes that you have a nats-server setup, and at least one ctrl node instance up running. How to setup a <strong>nats-server</strong> and a <strong>ctrl node</strong> on a computer/server can be found in the <strong>User Guides</strong> section of the documentation.</p>
+<p>In the examples below I've used the name <strong>node1</strong> as an example for the node that will receive the message when the github repository are updated.</p>
 <h2 id="github-action-runner-setup"><a class="header" href="#github-action-runner-setup">Github Action Runner setup</a></h2>
 <p>Create a Github repository.</p>
-<p>Clone the repository down to local machine or other.</p>
+<p>Clone the repository down to your local machine or other.</p>
 <pre><code class="language-bash">git clone &lt;my-repo-name&gt; &amp;&amp; cd my-repo-name
 </code></pre>
-<p>Create the github workflows folder</p>
+<p>Create a github workflows folder</p>
 <pre><code class="language-bash">mkdir -p .github/workflows
 </code></pre>
 <p>Create a <code>workflow.yaml</code> in the new directory with the following content.</p>
@@ -290,9 +210,10 @@ jobs:
       - run: &gt;
           sleep 5 &amp;&amp; tree
 </code></pre>
+<h2 id="define-nkey-as-github-secret"><a class="header" href="#define-nkey-as-github-secret">Define NKEY as github secret</a></h2>
 <p>In your repository, go to <strong>Settings-&gt;Secrets And Variables-&gt;Actions</strong> and press <strong>New Repository Secret</strong>. Give the new secret the name <strong>SEED</strong>, and put the content of the seed into <strong>Secret</strong>. This is the seed that we referenced earlier in the github action workflow.</p>
-<h2 id="send-a-message-by-updating-the-github-repository"><a class="header" href="#send-a-message-by-updating-the-github-repository">Send a message by updating the github repository</a></h2>
-<p>We want to send a message from the Github Action to node1, so we need to specify the content of the message to use.</p>
+<h2 id="define-message-with-command-to-send"><a class="header" href="#define-message-with-command-to-send">Define message with command to send</a></h2>
+<p>We want to send a message from the Github Action, so we need to specify the content of the message to use.</p>
 <p>In the root folder of the github folder create a <strong>message.yaml</strong> file, and fill in the following content:</p>
 <pre><code class="language-yaml">---
 - toNodes:
@@ -307,12 +228,12 @@ jobs:
   replyMethod: none
   ACKTimeout: 0
 </code></pre>
-<p>The message references a file to use with the cli command found in the <code>files</code> folder. So we need to create that.</p>
-<p>From the repository folder run:</p>
+<p>The message references a file with the <code>{{CTRL_FILE:&lt;file path&gt;}}</code> to use with the cli command found in the <code>files</code> folder. The file referenced will be embedded into the methodArgs defined in the message.</p>
+<p>From the repository folder run the following commands:</p>
 <pre><code class="language-bash">mkdir -p files
 echo "some cool text to put as file content.........." &gt; files/file.txt
 </code></pre>
-<p>The message will run a shell/cli command on node1 at delivery. The shell command will use the content of the file located at <code>&lt;repo&gt;/files/file.txt</code>, and create a file called <strong>file.txt</strong> in the ctrl working directory on <strong>node1</strong>.</p>
+<p>The example tries to show how we can get the message to run a shell/cli command on node1 at delivery. The shell command will use the content of the file located at <code>&lt;repo&gt;/files/file.txt</code>, and create a file called <strong>file.txt</strong> in the ctrl working directory on <strong>node1</strong>.</p>
 <h2 id="update-the-repository-and-send-message-with-command"><a class="header" href="#update-the-repository-and-send-message-with-command">Update the repository and send message with command</a></h2>
 <p>Commit the changes of the repository. If you check the <strong>Actions</strong> section of the new repo you should see that a an action have started.</p>
 <p>When the action is done, you should have received a file called <strong>file.txt</strong> in the ctrl working directory on <strong>node1</strong>, with the content you provided in <strong>text.txt</strong>.</p>
