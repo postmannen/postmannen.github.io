@@ -155,9 +155,12 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="introduction"><a class="header" href="#introduction">introduction</a></h1>
-<p>ctrl is a Command &amp; Control (C2) backend system for Servers, IOT and Edge platforms. Simply put, control anything.</p>
-<p>Example use cases:</p>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>ctrl is a Command &amp; Control (C2) backend system for Servers, IOT and Edge platforms. Simply put, control anything like a Fleet Manager.</p>
+<p>In operations ctrl can be used to send a set of commands to execute to a node, a group of nodes, or all nodes. It can also be used to gather operational data like logs and metrics from all the ctrl nodes.</p>
+<p>In forensics ctrl can be used to execute commands with tools to gather information needed. If the tools are not already present on an end ctrl node, ctrl can be used to copy the tools to that node, and then ctrl can run them to gather information.</p>
+<h2 id="usecases"><a class="header" href="#usecases">Usecases</a></h2>
+<p>Some example usecases are:</p>
 <ul>
 <li>Send shell commands or scripts to control one or many end nodes that will instruct to change config, restart services and control those systems.</li>
 <li>Gather data from both secure and not secure devices and systems, and transfer them encrypted in a secure way over the internet to your central system for handling those data.</li>
@@ -165,17 +168,19 @@
 <li>Distribute certificates.</li>
 <li>Run as a sidecar in Kubernetes for direct access to the pod.</li>
 </ul>
-<p>As long as you can do something as an operator in a shell on a system you can do the same with ctrl in a secure and encrypted way to one or all end nodes (servers) in one go with one single message/command.</p>
-<p>Ctrl is a system control tool that uses NATS as its messaging architecture. It allows you to send commands using request methods which are then executed on servers. If a receiving node is down, messages are retried based on the criteria set in their body. The results of these methods are delivered back to the
-sender.</p>
-<p>Ctrl is designed for concurrent processing and can handle multiple messages independently, even if some processes are slow or fail. It's compatible with various host OSs and systems including cloud containers, Raspberry Pi, and others with an installed operating system. Ctrl supports most major architectures such as x86, amd64, arm64, ppc64, and can run on operating systems like Linux, OSX, Windows.</p>
+<p>Ctrl is a versatile tool that enables users to control their systems with precision and efficiency. It's designed as a fleet manager, leveraging NATS as its messaging architecture, allowing for secure and encrypted communication between an operator and one or more servers.</p>
+<p>With Ctrl, you can accomplish tasks that you typically perform on a shell in a system - all with simple messages, using Ctrl's request methods. This feature allows for the execution of commands on remote servers, even if they are down at the time of sending. Messages will be retried based on the specified criteria in their body.</p>
+<p>Ctrl is built to handle multiple messages independently, by utilizing Go, the programming languages builtin concurrency. It can handle tasks such as executing a slow process without affecting other processes or systems. If a process fails, Ctrl ensures that it doesn't affect other operations, providing a reliable and robust system control solution.</p>
+<p>Furthermore, Ctrl is highly compatible with various host operating systems. It supports cloud containers, Raspberry Pi, and any other device with an installed operating system. It can run on a variety of architectures such as x86, amd64, arm64, ppc64, making it a versatile tool for system
+administration.</p>
+<p>Ctrl is compatible with most major operating systems including Linux, OSX, and Windows, giving users the flexibility to use Ctrl across different platforms.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
 
-                            <a rel="next prefetch" href="introduction_general_information.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="user_guide_install_docker.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -186,7 +191,7 @@ sender.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
 
-                    <a rel="next prefetch" href="introduction_general_information.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="user_guide_install_docker.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
