@@ -191,7 +191,7 @@
   schedule : [120,999999999]
 </code></pre>
 <p>In the above example, the httpGet will be run on the local node, and the result will be sent to my-metrics-node.</p>
-<h4 id="how-to-send-the-reply-to-another-node"><a class="header" href="#how-to-send-the-reply-to-another-node">How to send the reply to another node</a></h4>
+<h3 id="how-to-send-the-reply-to-another-node-further-explained"><a class="header" href="#how-to-send-the-reply-to-another-node-further-explained">How to send the reply to another node further explained</a></h3>
 <p>Normally the <strong>fromNode</strong> field is automatically filled in with the node name of the node where a message originated. Since messages within the startup folder is not received from another node via the normal message path we need set the <strong>fromNode</strong> field in the message to where we want the reply (result) delivered.</p>
 <p>As an example. If You want to place a message on the startup folder of <strong>node1</strong> and send the result to <strong>node2</strong>. Specify <strong>node2</strong> as the <strong>fromNode</strong>, and <strong>node1</strong> as the <strong>toNode</strong></p>
 <h4 id="use-local-as-the-tonode-nodename"><a class="header" href="#use-local-as-the-tonode-nodename">Use local as the toNode nodename</a></h4>
@@ -212,7 +212,7 @@
 ]
 
 </code></pre>
-<p>This example message will be read at startup, and executed on the local node where it was read, the method will be executed, and the result of the method will be sent to <strong>central</strong>.</p>
+<p>This example message will be read at startup, and executed on the local node where it was read, the method will be executed, and the result of the method will be sent to <strong>central</strong>. This is basically the same as the previous example, but we're using cliCommand method with curl instead of the httpGet method.</p>
 
                     </main>
 
