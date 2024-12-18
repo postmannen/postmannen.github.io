@@ -577,6 +577,19 @@ If <code>methodTimeout : -1</code> the method will not time out.</p>
 <p>Messages put in the startup folder will not be sent to the broker but handled locally, and only (eventually) the reply message from the Request Method called will be sent to the broker.</p>
 <p>This can be really handy when you have some 1-off job you want to done at startup, like some cleaning up.</p>
 <p>Another example could be that you have some local prometheus metrics you want to scrape every 5 minutes, and you want to send them to some central metrics system.</p>
+<pre><code class="language-yaml">---
+- toNodes:
+    - ["node1","node2"]
+  method: httpGet
+  methodArgs:
+    - "http://localhost:8080/metrics"
+  replyMethod: file
+  methodTimeout: 5
+  directory: metrics
+  fileName: metrics.html
+  schedule : [120,999999999]
+</code></pre>
+<p>The example above will scrape the metrics of node1 and node2 every 120 second, and write the results to a folder names <strong>data/metrics</strong> in the current running directory.</p>
 <h4 id="how-to-send-the-reply-to-another-node"><a class="header" href="#how-to-send-the-reply-to-another-node">How to send the reply to another node</a></h4>
 <p>Normally the <strong>fromNode</strong> field is automatically filled in with the node name of the node where a message originated. Since messages within the startup folder is not received from another node via the normal message path we need set the <strong>fromNode</strong> field in the message to where we want the reply (result) delivered.</p>
 <p>As an example. If You want to place a message on the startup folder of <strong>node1</strong> and send the result to <strong>node2</strong>. Specify <strong>node2</strong> as the <strong>fromNode</strong>, and <strong>node1</strong> as the <strong>toNode</strong></p>
