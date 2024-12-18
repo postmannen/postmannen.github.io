@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Http Get - ctrl</title>
+        <title>audit log - ctrl</title>
 
 
         <!-- Custom HTML head -->
@@ -155,51 +155,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="httpget"><a class="header" href="#httpget">httpGet</a></h1>
-<p>In JSON.</p>
-<pre><code class="language-json">[
-    {
-        "directory": "httpget",
-        "fileName": "finn.no.html",
-        "toNodes": ["node1","node2"],
-        "method":"httpGet",
-        "methodArgs": ["https://finn.no"],
-        "replyMethod":"file",
-        "ACKTimeout":5,
-        "retries":3,
-        "methodTimeout": 5
-    }
-]
-</code></pre>
-<p>In YAML.</p>
-<pre><code class="language-yaml">---
-- toNodes:
-    - ["node1","node2"]
-  method: httpGet
-  methodArgs:
-    - "https://finn.no"
-  replyMethod: file
-  ACKTimeout: 5
-  retries: 3
-  methodTimeout: 5
-  directory: httpget
-  fileName: finn.no.html
-</code></pre>
-<p>The result html file of the http get will be written to:</p>
-<ul>
-<li>&lt;data folder&gt;\httpget\node1\finn.no.html</li>
-<li>&lt;data folder&gt;\httpget\node2\finn.no.html</li>
-</ul>
+                        <h1 id="audit-log"><a class="header" href="#audit-log">audit log</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="core_audit_log.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="core_acl.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="example_standard_reqtailfile.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="example_standard_reqhttpget.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -209,11 +175,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="core_audit_log.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="core_acl.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="example_standard_reqtailfile.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="example_standard_reqhttpget.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

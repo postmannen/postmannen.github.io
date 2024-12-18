@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Http Get - ctrl</title>
+        <title>hello messages - ctrl</title>
 
 
         <!-- Custom HTML head -->
@@ -155,51 +155,22 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="httpget"><a class="header" href="#httpget">httpGet</a></h1>
-<p>In JSON.</p>
-<pre><code class="language-json">[
-    {
-        "directory": "httpget",
-        "fileName": "finn.no.html",
-        "toNodes": ["node1","node2"],
-        "method":"httpGet",
-        "methodArgs": ["https://finn.no"],
-        "replyMethod":"file",
-        "ACKTimeout":5,
-        "retries":3,
-        "methodTimeout": 5
-    }
-]
-</code></pre>
-<p>In YAML.</p>
-<pre><code class="language-yaml">---
-- toNodes:
-    - ["node1","node2"]
-  method: httpGet
-  methodArgs:
-    - "https://finn.no"
-  replyMethod: file
-  ACKTimeout: 5
-  retries: 3
-  methodTimeout: 5
-  directory: httpget
-  fileName: finn.no.html
-</code></pre>
-<p>The result html file of the http get will be written to:</p>
-<ul>
-<li>&lt;data folder&gt;\httpget\node1\finn.no.html</li>
-<li>&lt;data folder&gt;\httpget\node2\finn.no.html</li>
-</ul>
+                        <h1 id="hello-messages"><a class="header" href="#hello-messages">Hello messages</a></h1>
+<p>All nodes can send hello messages to inform that they are up. The interval between sending a hello message can be set with the <code>START_PUB_HELLO</code> environment variable.</p>
+<p>Hello messages are sent to the node with the name <strong>central</strong>. When a hello message are received on central, information with the time and node name will be stored in the <strong>ctrl data folder</strong></p>
+<h2 id="public-keys"><a class="header" href="#public-keys">Public keys</a></h2>
+<p>ctrl nodes can use ed25519 keys for signing messages, so each ctrl instance will generate a public and private key pair on startup. The public keys are sent to the central server with the hello messages.</p>
+<p>To read more about signing keys here: <a href="./core_signing_keys.html">signing keys</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="core_audit_log.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="core_central.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="example_standard_reqtailfile.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="core_signing_keys.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -209,11 +180,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="core_audit_log.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="core_central.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="example_standard_reqtailfile.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="core_signing_keys.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

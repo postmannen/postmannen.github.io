@@ -555,7 +555,72 @@ If <code>methodTimeout : -1</code> the method will not time out.</p>
 <tr><td>fileAppend</td><td>Append to file, can also write to unix sockets</td></tr>
 <tr><td>file</td><td>Write to file, can also write to unix sockets</td></tr>
 </tbody></table>
-</div><div style="break-before: page; page-break-before: always;"></div><h1 id="nats-timeouts"><a class="header" href="#nats-timeouts">Nats timeouts</a></h1>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="ctrl_data-variable"><a class="header" href="#ctrl_data-variable">{{CTRL_DATA}} variable</a></h1>
+<p>By using the <code>{{CTRL_DATA}}</code> you can grab the result output of your initial request method, and then use it as input in your reply method.</p>
+<p><strong>NB:</strong> The echo command in the example below will remove new lines from the data. To also keep any new lines we need to put escaped <strong>quotes</strong> around the template variable. Like this:</p>
+<ul>
+<li><code>\"{{CTRL_DATA}}\"</code></li>
+</ul>
+<p>Example of usage:</p>
+<pre><code class="language-json">[
+    {
+        "directory":"cli_command_test",
+        "fileName":"cli_command.result",
+        "toNode": "node2",
+        "method":"cliCommand",
+        "methodArgs": ["bash","-c","tree"],
+        "replyMethod":"cliCommand",
+        "replyMethodArgs": ["bash", "-c","echo \"{{CTRL_DATA}}\" &gt; apekatt.txt"],
+        "replyMethodTimeOut": 10,
+        "ACKTimeout":3,
+        "retries":3,
+        "methodTimeout": 10
+    }
+]
+</code></pre>
+<p>The above example, with steps explained:</p>
+<ul>
+<li>Send a message from <strong>node1</strong> to <strong>node2</strong> with a Request Method of type cliCommand.</li>
+<li>When received at <strong>node2</strong> we execute the Reqest Method with the arguments specified in the methodArgs.</li>
+<li>When the method on <strong>node2</strong> is done the result data of the method run will be stored in the variable {{CTRL_DATA}}. We can then use this variable when we craft the reply message method by embedding it into a new bash command.</li>
+<li>The reply message is then sent back to <strong>node1</strong>, the method will be executed, and all newlines in the result data will be removed, and all the data with the new lines removed will be stored in a file called <code>apekatt.txt</code></li>
+</ul>
+<p>The same using bash's herestring:</p>
+<pre><code class="language-json">[
+    {
+        "directory":"cli_command_test",
+        "fileName":"cli_command.result",
+        "toNode": "ship2",
+        "method":"cliCommand",
+        "methodArgs": ["bash","-c","tree"],
+        "replyMethod":"cliCommand",
+        "replyMethodArgs": ["bash", "-c","cat &lt;&lt;&lt; {{CTRL_DATA}} &gt; hest.txt"],
+        "replyMethodTimeOut": 10,
+        "ACKTimeout":3,
+        "retries":3,
+        "methodTimeout": 10
+    }
+]
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="message-methodargs-variables"><a class="header" href="#message-methodargs-variables">Message methodArgs variables</a></h1>
+<h2 id="ctrl_file"><a class="header" href="#ctrl_file">{{CTRL_FILE}}</a></h2>
+<p>Read a local text file, and embed the content of the file into the methodArgs.</p>
+<pre><code class="language-yaml">---
+- toNodes:
+    - btdev1
+  #jetstreamToNode: btdev1
+  method: cliCommand
+  methodArgs:
+    - /bin/bash
+    - -c
+    - |
+      echo {{CTRL_FILE:/some_directory/source_file.yaml}}&gt;/other_directory/destination_file.yaml
+  methodTimeout: 3
+  replyMethod: console
+  ACKTimeout: 0
+</code></pre>
+<p>The above example will before sending the message read the content of the file <code>/some_directory/source_file.yaml</code>. When the message is received at it's destination node and the cliCommand is executed the content will be written to <code>/other_directory/destination_file.yaml</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="nats-timeouts"><a class="header" href="#nats-timeouts">Nats timeouts</a></h1>
 <p>The various timeouts for the NATS messages can be controlled via an .env file or flags.</p>
 <p>If the network media is a high latency like satellite links, it will make sense to adjust the client timeout to reflect the latency</p>
 <pre><code class="language-text">  -natsConnOptTimeout int
@@ -629,77 +694,23 @@ If <code>methodTimeout : -1</code> the method will not time out.</p>
 
 </code></pre>
 <p>This example message will be read at startup, and executed on the local node where it was read, the method will be executed, and the result of the method will be sent to <strong>central</strong>. This is basically the same as the previous example, but we're using cliCommand method with curl instead of the httpGet method.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="ctrl_data-variable"><a class="header" href="#ctrl_data-variable">{{CTRL_DATA}} variable</a></h1>
-<p>By using the <code>{{CTRL_DATA}}</code> you can grab the result output of your initial request method, and then use it as input in your reply method.</p>
-<p><strong>NB:</strong> The echo command in the example below will remove new lines from the data. To also keep any new lines we need to put escaped <strong>quotes</strong> around the template variable. Like this:</p>
-<ul>
-<li><code>\"{{CTRL_DATA}}\"</code></li>
-</ul>
-<p>Example of usage:</p>
-<pre><code class="language-json">[
-    {
-        "directory":"cli_command_test",
-        "fileName":"cli_command.result",
-        "toNode": "node2",
-        "method":"cliCommand",
-        "methodArgs": ["bash","-c","tree"],
-        "replyMethod":"cliCommand",
-        "replyMethodArgs": ["bash", "-c","echo \"{{CTRL_DATA}}\" &gt; apekatt.txt"],
-        "replyMethodTimeOut": 10,
-        "ACKTimeout":3,
-        "retries":3,
-        "methodTimeout": 10
-    }
-]
-</code></pre>
-<p>The above example, with steps explained:</p>
-<ul>
-<li>Send a message from <strong>node1</strong> to <strong>node2</strong> with a Request Method of type cliCommand.</li>
-<li>When received at <strong>node2</strong> we execute the Reqest Method with the arguments specified in the methodArgs.</li>
-<li>When the method on <strong>node2</strong> is done the result data of the method run will be stored in the variable {{CTRL_DATA}}. We can then use this variable when we craft the reply message method by embedding it into a new bash command.</li>
-<li>The reply message is then sent back to <strong>node1</strong>, the method will be executed, and all newlines in the result data will be removed, and all the data with the new lines removed will be stored in a file called <code>apekatt.txt</code></li>
-</ul>
-<p>The same using bash's herestring:</p>
-<pre><code class="language-json">[
-    {
-        "directory":"cli_command_test",
-        "fileName":"cli_command.result",
-        "toNode": "ship2",
-        "method":"cliCommand",
-        "methodArgs": ["bash","-c","tree"],
-        "replyMethod":"cliCommand",
-        "replyMethodArgs": ["bash", "-c","cat &lt;&lt;&lt; {{CTRL_DATA}} &gt; hest.txt"],
-        "replyMethodTimeOut": 10,
-        "ACKTimeout":3,
-        "retries":3,
-        "methodTimeout": 10
-    }
-]
-</code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="message-methodargs-variables"><a class="header" href="#message-methodargs-variables">Message methodArgs variables</a></h1>
-<h2 id="ctrl_file"><a class="header" href="#ctrl_file">{{CTRL_FILE}}</a></h2>
-<p>Read a local text file, and embed the content of the file into the methodArgs.</p>
-<pre><code class="language-yaml">---
-- toNodes:
-    - btdev1
-  #jetstreamToNode: btdev1
-  method: cliCommand
-  methodArgs:
-    - /bin/bash
-    - -c
-    - |
-      echo {{CTRL_FILE:/some_directory/source_file.yaml}}&gt;/other_directory/destination_file.yaml
-  methodTimeout: 3
-  replyMethod: console
-  ACKTimeout: 0
-</code></pre>
-<p>The above example will before sending the message read the content of the file <code>/some_directory/source_file.yaml</code>. When the message is received at it's destination node and the cliCommand is executed the content will be written to <code>/other_directory/destination_file.yaml</code>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="errors"><a class="header" href="#errors">Errors</a></h1>
 <p>Errors happening on <strong>all</strong> nodes will be reported back to the node(s) started with the flag <code>-isCentralErrorLogger</code> set to true, or by using the <code>IS_CENTRAL_ERROR_LOGGER</code> env variable.</p>
 <h2 id="log-level"><a class="header" href="#log-level">Log level</a></h2>
 <p>The log level can also be specified with the <code>LOG_LEVEL</code> env variable. Values are <code>error/info/warning/debug/none</code>.</p>
 <h2 id="debug"><a class="header" href="#debug">Debug</a></h2>
 <p>To get more debug information in the logs printed to STDERR the env variable <code>ENABLE_DEBUG</code> can be set to true. This will not affect the information printed to the log files, only to STDERR.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="central"><a class="header" href="#central">central</a></h1>
+<p>To get functionality like central audit log, signing keys, authorization with ACL's and hello messages one node should be started with the node name <strong>central</strong></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hello-messages"><a class="header" href="#hello-messages">Hello messages</a></h1>
+<p>All nodes can send hello messages to inform that they are up. The interval between sending a hello message can be set with the <code>START_PUB_HELLO</code> environment variable.</p>
+<p>Hello messages are sent to the node with the name <strong>central</strong>. When a hello message are received on central, information with the time and node name will be stored in the <strong>ctrl data folder</strong></p>
+<h2 id="public-keys"><a class="header" href="#public-keys">Public keys</a></h2>
+<p>ctrl nodes can use ed25519 keys for signing messages, so each ctrl instance will generate a public and private key pair on startup. The public keys are sent to the central server with the hello messages.</p>
+<p>To read more about signing keys here: <a href="./core_signing_keys.html">signing keys</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="signing-keys"><a class="header" href="#signing-keys">signing keys</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="acl"><a class="header" href="#acl">ACL</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="audit-log"><a class="header" href="#audit-log">audit log</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="httpget"><a class="header" href="#httpget">httpGet</a></h1>
 <p>In JSON.</p>
 <pre><code class="language-json">[
