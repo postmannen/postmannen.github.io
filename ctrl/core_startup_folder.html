@@ -160,6 +160,7 @@
 <p>A folder named <strong>startup</strong> will be present in the working directory of ctrl. To inject messages at startup, put them here.</p>
 <p>Messages put in the startup folder will not be sent to the broker but handled locally, and only (eventually) the reply message from the Request Method called will be sent to the broker.</p>
 <p>This can be really handy when you have some 1-off job you want to done at startup, like some cleaning up.</p>
+<h2 id="example-reqest-metrics-from-nodes"><a class="header" href="#example-reqest-metrics-from-nodes">Example reqest metrics from nodes</a></h2>
 <p>Another example could be that you have some local prometheus metrics you want to scrape every 5 minutes, and you want to send them to some central metrics system.</p>
 <pre><code class="language-yaml">---
 - toNodes:
@@ -173,7 +174,23 @@
   fileName: metrics.html
   schedule : [120,999999999]
 </code></pre>
-<p>The example above will scrape the metrics of node1 and node2 every 120 second, and write the results to a folder names <strong>data/metrics</strong> in the current running directory.</p>
+<p>The example above will send out a request to node1 and node2 every 120 second to scrape the metrics and write the results that came back to a folder named <strong>data/metrics</strong> in the current running directory.</p>
+<h2 id="example-read-metrics-locally-first-and-then-send-to-remote-node"><a class="header" href="#example-read-metrics-locally-first-and-then-send-to-remote-node">Example read metrics locally first, and then send to remote node</a></h2>
+<p>But we can also make the nodes publish their metrics instead of requesting it by putting a message in each nodes startup folder, set the <strong>toNode</strong> field to local, and instead use the <strong>fromNode</strong> field to decide where to deliver the result.</p>
+<pre><code class="language-yaml">---
+- toNodes:
+    - ["local"]
+  fromNode: my-metrics-node
+  method: httpGet
+  methodArgs:
+    - "http://localhost:8080/metrics"
+  replyMethod: file
+  methodTimeout: 5
+  directory: metrics
+  fileName: metrics.html
+  schedule : [120,999999999]
+</code></pre>
+<p>In the above example, the httpGet will be run on the local node, and the result will be sent to my-metrics-node.</p>
 <h4 id="how-to-send-the-reply-to-another-node"><a class="header" href="#how-to-send-the-reply-to-another-node">How to send the reply to another node</a></h4>
 <p>Normally the <strong>fromNode</strong> field is automatically filled in with the node name of the node where a message originated. Since messages within the startup folder is not received from another node via the normal message path we need set the <strong>fromNode</strong> field in the message to where we want the reply (result) delivered.</p>
 <p>As an example. If You want to place a message on the startup folder of <strong>node1</strong> and send the result to <strong>node2</strong>. Specify <strong>node2</strong> as the <strong>fromNode</strong>, and <strong>node1</strong> as the <strong>toNode</strong></p>
