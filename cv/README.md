@@ -13,8 +13,8 @@ A highly skilled professional with a passion for knowledge and a keen interest i
 Been working with Data centers, Network, Security, Servers, and Monitoring since 1997, and made the switch to fulltime Development in 2017.
 
 Creator of **ctrl** a fleet manager service.
-Doc: [postmannen.github.io/ctrl/](https://postmannen.github.io/ctrl/)
-Github: [github.com/postmannen/ctrl](https://github.com/postmannen/ctrl)
+Doc: [postmannen.github.io/ctrl/](https://postmannen.github.io/ctrl/)\
+Github: [github.com/postmannen/ctrl](https://github.com/postmannen/ctrl)\
 
 The most recent jobs and activities can be found below.
 
