@@ -6,24 +6,21 @@ Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com
 
 ## Summary
 
-A tech-savvy individual with a passion for learning new things and exploring diverse fields including programming, network, security, linux , psychology, music, electronics, farming, and more. In 2017, I decided to focus on Go development as the primary area of expertise. My broad experience often enables me to approach problems from multiple perspectives, for successful product development and efficiently resolving of complex issues within projects or independently.
+A highly skilled professional with a passion for knowledge and a keen interest in exploring various fields such as programming, networks, security, Linux, psychology, music, electronics, farming, and more. In 2017, I decided to focus on Go development as the primary area of expertise. My multidisciplinary background often provides me with the unique ability to tackle challenges from diverse angles, making me an effective contributor to successful product development and adept at solving intricate problems within projects or independently.
 
 ## Professional Experience
 
 Been working with Data centers, Network, Security, Servers, and Monitoring since 1997, and made the switch to fulltime Development in 2017.
 
+Creator of **ctrl** a fleet manager service.
+Doc: [postmannen.github.io/ctrl/](https://postmannen.github.io/ctrl/)
+Github: [github.com/postmannen/ctrl](https://github.com/postmannen/ctrl)
+
 The most recent jobs and activities can be found below.
 
-### Jul 2023 - Present, selfstudy, and shorter assignments
+### Apr 2024 - Present, Ikomm, Senior Security Engineer
 
-- eBPF, tracing, handling network traffic on Linux servers.
-- AI in the form of llama.
-- Security.
-- Further dive into Actor systems.
-
-### Apr 2023 - Present, Ikomm, Senior Security Engineer
-
-- Design and build Security Platforms.
+- Go Programming. Design and Build Security Platforms.
 
 ### Jan 2020 - Jun 2023, Raa Labs, Contract
 
@@ -96,6 +93,7 @@ I like to know how technology and the value chain work as a whole.  Other areas 
 - Telecom.
 - Farming and food production.
 - Shipping.
+- Municipalities.
 
 ### My Side Project
 
@@ -108,6 +106,8 @@ I like to know how technology and the value chain work as a whole.  Other areas 
 #### Some more examples of my projects and ideas are mentioned below
 
 - Async management of servers/endpoints using Nats where everything is done with passing messages and concurrent. [Steward](https://github.com/postmannen/steward)
+
+- CTRL, async fleet manager. The original repository of Steward were made private, and CTRL is the continuation of honing that idea on my own [CTRL](https://github.com/postmannen/ctrl).
 
 - Traffic sniffer who lets you know what your computer communicated with, and how much data transfered. [trafficmonitor](https://github.com/RaaLabs/trafficmonitor)
 
