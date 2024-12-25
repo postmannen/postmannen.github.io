@@ -156,12 +156,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="clicommand"><a class="header" href="#clicommand">cliCommand</a></h1>
-<p>With <strong>cliCommand</strong> you specify the command to run in <strong>methodArgs</strong> prefixed with the interpreter to use, for example <strong>bash</strong></p>
-<p>On Linux and Darwin, the shell interpreter can also be auto detected by setting the value of <strong>shellDetect</strong> in the message to <strong>true</strong>. If set to true the methodArgs only need a single string value with command to run. Example below.</p>
+<p>With <strong>cliCommand</strong> you specify the command to run in <strong>methodArgs</strong> prefixed with the interpreter to use, for example with bash <strong>bash</strong> <code>"bash","-c","tree"</code>.</p>
+<p>On Linux and Darwin, the shell interpreter can also be auto detected by setting the value of <strong>useDetectedShell</strong> in the message to <strong>true</strong>. If set to true the methodArgs only need a single string value with command to run. Example below.</p>
 <pre><code class="language-yaml">---
 - toNodes:
     - node2
-  shellDetect: true
+  UseDetectedShell: true
   method: cliCommand
   methodArgs:
     - |
