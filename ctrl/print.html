@@ -372,6 +372,28 @@ authorization: {
 <p>You can find your public ip address here <a href="https://ipv4.jsonip.com/">https://ipv4.jsonip.com/</a>.</p>
 <h2 id="other"><a class="header" href="#other">Other</a></h2>
 <p>More details like how to use certificates to encrypt the communication can be found in the official nats docs, <a href="https://docs.nats.io/">https://docs.nats.io/</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="core-overview"><a class="header" href="#core-overview">Core overview</a></h1>
+<p>This is just a quick introduction to the core concepts of ctrl. Details can be found by reading further in the <strong>Core ctrl</strong> section.</p>
+<h2 id="concept"><a class="header" href="#concept">Concept</a></h2>
+<p>In ctrl all nodes are treated equally, and there is no concept of client/server. There are just nodes that can send messages to other nodes, and the messages contains commands of what to do on the node that receives the message.</p>
+<style>
+img {
+  background-color: #FFFFFF;
+}
+</style>
+</head>
+<body>
+<p align="center"><img src="https://github.com/postmannen/ctrl/blob/main/doc/core-messaging.svg?raw=true" /></p>
+</body>
+<p>A message can be sent from a node to one, many, groups or all nodes with a command to execute, and the result of when the command is done will be sent back to where the message originated.</p>
+<h2 id="central"><a class="header" href="#central">Central</a></h2>
+<p>There should be at least one node acting as the <strong>central</strong> in each environment. The central node will have functionality like:</p>
+<ul>
+<li>Audit logging of all commands sent and executed on nodes.</li>
+<li>Handling and distributing keys for signing messages.</li>
+<li>Handling and distributing Access Lists (ACL) for authorizing messages.</li>
+<li>General error logging.</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="messaging"><a class="header" href="#messaging">Messaging</a></h1>
 <p>The handling of all messages is done by spawning up a process for handling the message in it's own thread. This allows us for indivudual control of each message both in regards to ACK's, error handling, send retries, and reruns of methods for a message if the first run was not successful.</p>
 <p>All messages processed by a publisher will be written to a log file after they are processed, with all the information needed to recreate the same message if needed, or it can be used for auditing.</p>
@@ -420,6 +442,27 @@ img {
 </code></pre>
 <p>The use of {{CTRL_DATA}} allows us to take the result of the initial method, and embed that in the reply message. The use are further explained in <a href="core_messaging_CTRL_DATA.html">{{CTRL_DATA}} variable</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="message-fields"><a class="header" href="#message-fields">Message fields</a></h1>
+<h2 id="schema-for-the-message-structure-to-use-with-ctrl"><a class="header" href="#schema-for-the-message-structure-to-use-with-ctrl">Schema for the message structure to use with ctrl</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Field Name</th><th>Value Type</th><th>Description</th></tr></thead><tbody>
+<tr><td>toNode</td><td><code>string</code></td><td>A single node to send a message to</td></tr>
+<tr><td>toNodes</td><td><code>string array</code></td><td>A comma separated list of nodes to send a message to</td></tr>
+<tr><td>jetstreamToNode</td><td><code>string array</code></td><td>JetstreamToNode, the topic used to prefix the stream name with the format NODES.&lt;JetstreamToNode&gt;</td></tr>
+<tr><td>method</td><td><code>string</code></td><td>The request method to use</td></tr>
+<tr><td>methodArgs</td><td><code>string array</code></td><td>The arguments to use for the method</td></tr>
+<tr><td>replyMethod</td><td><code>string</code></td><td>The method to use for the reply message</td></tr>
+<tr><td>replyMethodArgs</td><td><code>string array</code></td><td>The arguments to use for the reply method</td></tr>
+<tr><td>ACKTimeout</td><td><code>int</code></td><td>The time to wait for a received acknowledge (ACK). 0 for no acknowledge</td></tr>
+<tr><td>retries</td><td><code>int</code></td><td>The number of times to retry if no ACK was received</td></tr>
+<tr><td>replyACKTimeout</td><td><code>int</code></td><td>The timeout to wait for an ACK message before we retry</td></tr>
+<tr><td>replyRetries</td><td><code>int</code></td><td>The number of times to retry if no ACK was received for repply messages</td></tr>
+<tr><td>methodTimeout</td><td><code>int</code></td><td>The timeout in seconds for how long we wait for a method to complete</td></tr>
+<tr><td>replyMethodTimeout</td><td><code>int</code></td><td>The timeout in seconds for how long we wait for a method to complete for repply messages</td></tr>
+<tr><td>directory</td><td><code>string</code></td><td>The directory for where to store the data of the repply message</td></tr>
+<tr><td>fileName</td><td><code>string</code></td><td>The name of the file for where we store the data of the reply message</td></tr>
+<tr><td>schedule</td><td>[int type value for interval in seconds, int type value for total run time in seconds]</td><td>Schedule a message to re run at interval</td></tr>
+</tbody></table>
+</div>
+<h2 id="more-detailed-description-of-the-fields"><a class="header" href="#more-detailed-description-of-the-fields">More detailed description of the fields</a></h2>
 <pre><code class="language-yaml">toNode : "some-node"
 </code></pre>
 <p>The node to send the message to.</p>
@@ -431,8 +474,7 @@ img {
 <p>The actual data in the message. This is the field where we put the returned data in a reply message. The data field are of type []byte.</p>
 <pre><code class="language-yaml">method : cliCommand
 </code></pre>
-<p>What request method type to use, like cliCommand, httpGet..</p>
-<p>All <a href="./core_request_methods.html">methods</a>.</p>
+<p>What request method type to use, like cliCommand, httpGet, <a href="./core_request_methods.html">all methods</a>.</p>
 <pre><code class="language-yaml">  methodArgs :
   - "bash"
   - "-c"
@@ -700,7 +742,7 @@ If <code>methodTimeout : -1</code> the method will not time out.</p>
 <p>The log level can also be specified with the <code>LOG_LEVEL</code> env variable. Values are <code>error/info/warning/debug/none</code>.</p>
 <h2 id="debug"><a class="header" href="#debug">Debug</a></h2>
 <p>To get more debug information in the logs printed to STDERR the env variable <code>ENABLE_DEBUG</code> can be set to true. This will not affect the information printed to the log files, only to STDERR.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="central"><a class="header" href="#central">central</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="central-1"><a class="header" href="#central-1">central</a></h1>
 <p>To get functionality like central audit log, signing keys, authorization with ACL's and hello messages one node should be started with the node name <strong>central</strong></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hello-messages"><a class="header" href="#hello-messages">Hello messages</a></h1>
 <p>All nodes can send hello messages to inform that they are up. The interval between sending a hello message can be set with the <code>START_PUB_HELLO</code> environment variable.</p>
@@ -1047,6 +1089,11 @@ echo "some cool text to put as file content.........." &gt; files/file.txt
 <p>Commit the changes to the repo, and the deployment should be executed if you have a kubernetes instance running on <strong>node1</strong>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="ctrl-as-prometheus-collector"><a class="header" href="#ctrl-as-prometheus-collector">ctrl as prometheus collector</a></h1>
 <p>ctrl can be used to collect collect metrics from various systems. It can for example scrape/read some defined metrics with one node, and deliver the result to another node where you can expose the metrics directly using ctrl's builtin http server, or you could for example inject the metrics data to some database if that is desired. It is totally up to you.</p>
+</style>
+</head>
+<body>
+<p align="center"><img src="https://github.com/postmannen/ctrl/blob/main/doc/usecase-prometheus-collector.svg?raw=true" /></p>
+</body>
 <p>The example that follows will scrape prometheus metrics with two ctrl nodes, deliver them to a third node called <strong>metrics</strong>, and expose them with the builtin http server. Prometheus can then be used to read all the metrics from the various nodes on the <strong>metrics</strong> node.</p>
 <p>Before you start, make sure to read the <strong>User Guides</strong> section for how to start up a NATS broker, and for general information about setting up ctrl.</p>
 <h2 id="node-setup"><a class="header" href="#node-setup">Node Setup</a></h2>

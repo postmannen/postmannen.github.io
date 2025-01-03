@@ -156,6 +156,27 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="message-fields"><a class="header" href="#message-fields">Message fields</a></h1>
+<h2 id="schema-for-the-message-structure-to-use-with-ctrl"><a class="header" href="#schema-for-the-message-structure-to-use-with-ctrl">Schema for the message structure to use with ctrl</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Field Name</th><th>Value Type</th><th>Description</th></tr></thead><tbody>
+<tr><td>toNode</td><td><code>string</code></td><td>A single node to send a message to</td></tr>
+<tr><td>toNodes</td><td><code>string array</code></td><td>A comma separated list of nodes to send a message to</td></tr>
+<tr><td>jetstreamToNode</td><td><code>string array</code></td><td>JetstreamToNode, the topic used to prefix the stream name with the format NODES.&lt;JetstreamToNode&gt;</td></tr>
+<tr><td>method</td><td><code>string</code></td><td>The request method to use</td></tr>
+<tr><td>methodArgs</td><td><code>string array</code></td><td>The arguments to use for the method</td></tr>
+<tr><td>replyMethod</td><td><code>string</code></td><td>The method to use for the reply message</td></tr>
+<tr><td>replyMethodArgs</td><td><code>string array</code></td><td>The arguments to use for the reply method</td></tr>
+<tr><td>ACKTimeout</td><td><code>int</code></td><td>The time to wait for a received acknowledge (ACK). 0 for no acknowledge</td></tr>
+<tr><td>retries</td><td><code>int</code></td><td>The number of times to retry if no ACK was received</td></tr>
+<tr><td>replyACKTimeout</td><td><code>int</code></td><td>The timeout to wait for an ACK message before we retry</td></tr>
+<tr><td>replyRetries</td><td><code>int</code></td><td>The number of times to retry if no ACK was received for repply messages</td></tr>
+<tr><td>methodTimeout</td><td><code>int</code></td><td>The timeout in seconds for how long we wait for a method to complete</td></tr>
+<tr><td>replyMethodTimeout</td><td><code>int</code></td><td>The timeout in seconds for how long we wait for a method to complete for repply messages</td></tr>
+<tr><td>directory</td><td><code>string</code></td><td>The directory for where to store the data of the repply message</td></tr>
+<tr><td>fileName</td><td><code>string</code></td><td>The name of the file for where we store the data of the reply message</td></tr>
+<tr><td>schedule</td><td>[int type value for interval in seconds, int type value for total run time in seconds]</td><td>Schedule a message to re run at interval</td></tr>
+</tbody></table>
+</div>
+<h2 id="more-detailed-description-of-the-fields"><a class="header" href="#more-detailed-description-of-the-fields">More detailed description of the fields</a></h2>
 <pre><code class="language-yaml">toNode : "some-node"
 </code></pre>
 <p>The node to send the message to.</p>
@@ -167,8 +188,7 @@
 <p>The actual data in the message. This is the field where we put the returned data in a reply message. The data field are of type []byte.</p>
 <pre><code class="language-yaml">method : cliCommand
 </code></pre>
-<p>What request method type to use, like cliCommand, httpGet..</p>
-<p>All <a href="./core_request_methods.html">methods</a>.</p>
+<p>What request method type to use, like cliCommand, httpGet, <a href="./core_request_methods.html">all methods</a>.</p>
 <pre><code class="language-yaml">  methodArgs :
   - "bash"
   - "-c"
