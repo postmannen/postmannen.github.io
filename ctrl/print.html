@@ -783,7 +783,7 @@ If <code>methodTimeout : -1</code> the method will not time out.</p>
 <pre><code class="language-yaml">---
 - toNodes:
     - node2
-  UseDetectedShell: true
+  useDetectedShell: true
   method: cliCommand
   methodArgs:
     - |
@@ -1045,6 +1045,65 @@ echo "some cool text to put as file content.........." &gt; files/file.txt
 </code></pre>
 <p>Create a new file in the <code>&lt;repo&gt;/files</code> folder named <strong>mydeployment.yaml</strong>.</p>
 <p>Commit the changes to the repo, and the deployment should be executed if you have a kubernetes instance running on <strong>node1</strong>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ctrl-as-prometheus-collector"><a class="header" href="#ctrl-as-prometheus-collector">ctrl as prometheus collector</a></h1>
+<p>ctrl can be used to collect collect metrics from various systems. It can for example scrape/read some defined metrics with one node, and deliver the result to another node where you can expose the metrics directly using ctrl's builtin http server, or you could for example inject the metrics data to some database if that is desired. It is totally up to you.</p>
+<p>The example that follows will scrape prometheus metrics with two ctrl nodes, deliver them to a third node called <strong>metrics</strong>, and expose them with the builtin http server. Prometheus can then be used to read all the metrics from the various nodes on the single <strong>central</strong> node.</p>
+<p>Before you start, make sure to read the <strong>User Guides</strong> section for how to start up a NATS broker, and for general information about setting up ctrl.</p>
+<h2 id="node-setup"><a class="header" href="#node-setup">Node Setup</a></h2>
+<h3 id="central-node"><a class="header" href="#central-node">central node</a></h3>
+<p>Start up a ctrl node named <strong>central</strong> that will serve as central for audit logs and other system logs happening with the ctrl nodes. Example of .env file to use.</p>
+<pre><code class="language-env">NODE_NAME=central
+BROKER_ADDRESS=localhost:4222
+LOG_LEVEL=info
+START_PUB_HELLO=60
+IS_CENTRAL_ERROR_LOGGER=true
+</code></pre>
+<h3 id="collected-metrics-node"><a class="header" href="#collected-metrics-node">collected metrics node</a></h3>
+<p>Start up a node named <strong>metrics</strong> that will serve as the central place where we deliver all the metrics. On this node we expose ctrl's data folder over http. Example .env file below.</p>
+<pre><code class="language-env">NODE_NAME=metrics
+BROKER_ADDRESS=localhost:4222
+LOG_LEVEL=info
+START_PUB_HELLO=60
+EXPOSE_DATA_FOLDER=localhost:6060
+</code></pre>
+<h3 id="metrics-collector-nodes"><a class="header" href="#metrics-collector-nodes">metrics collector nodes</a></h3>
+<h4 id="prometheus-node-exporter"><a class="header" href="#prometheus-node-exporter">prometheus node exporter</a></h4>
+<p>If don't yet have any metrics to collect, you can start up <a href="https://github.com/prometheus/node_exporter">prometheus node_exporter</a> to get some local system metrics.</p>
+<h4 id="collector-node-setup"><a class="header" href="#collector-node-setup">collector node setup</a></h4>
+<p>The following configuration file can be used on all nodes, but for each node started replace with a unique <strong>NODE_NAME</strong>, eg. <strong>node1</strong> and <strong>node2</strong>.</p>
+<pre><code class="language-env">NODE_NAME=node1     #give each node a unique node name
+BROKER_ADDRESS=localhost:4222
+LOG_LEVEL=info
+START_PUB_HELLO=60
+</code></pre>
+<h5 id="startup-folder-1"><a class="header" href="#startup-folder-1">Startup folder</a></h5>
+<p>Each ctrl instance started will have a <strong>startup</strong> folder in it's running directory. Messages in the startup folder will be read at startup, and handled by ctrl.</p>
+<p>We can use the <strong>schedule</strong> field in the message to make ctrl rerun the method of the message at a scheduled interval.</p>
+<p>Put the following message in the <strong>startup</strong> folder on all the nodes that will collect metrics.</p>
+<pre><code class="language-yaml">---
+- toNodes:
+    # Deliver the message locally
+    - local
+  # Set the node where we send the reply with the result
+  fromNode: central
+  method: httpGet
+  methodArgs:
+    - http://localhost:9100/metrics
+  # Write the result to a file on the fromNode
+  replyMethod: file
+  # The directory which we want to write the result in
+  directory: nodeexporters
+  # The filename we want to write the result to
+  fileName: metrics.html
+  # Schedule rerun of the method every 30 second, for 999999999 seconds.
+  schedule: [30,999999999]
+</code></pre>
+<h2 id="check-the-collected-metrics"><a class="header" href="#check-the-collected-metrics">Check the collected metrics</a></h2>
+<p>When all nodes are started, they should start to send metrics to the <strong>metrics</strong> node. We can see the result by using curl on the node named <strong>metrics</strong>.</p>
+<pre><code class="language-bash">http://localhost:6060/nodeexporters/node1/metrics.html
+http://localhost:6060/nodeexporters/node2/metrics.html
+</code></pre>
+<p>If you want to do something further with this example you can install prometheus on the <strong>metrics</strong> node, and direct it to collect read the metrics from the various folders via the url's above.</p>
 
                     </main>
 
