@@ -191,7 +191,7 @@ BROKER_ADDRESS=localhost:4222
 LOG_LEVEL=info
 START_PUB_HELLO=60
 </code></pre>
-<p>Create 2-3 (node1,node2,node3)nodes which will be the nodes that scrape some metrics on some host.</p>
+<p>Create 2-3 (node1,node2,node3) nodes which will be the nodes that scrape some metrics on some host.</p>
 <h5 id="startup-folder"><a class="header" href="#startup-folder">Startup folder</a></h5>
 <p>Each ctrl instance started will have a <strong>startup</strong> folder in it's running directory. Messages in the startup folder will be read at startup, and handled by ctrl.</p>
 <p>We can use the <strong>schedule</strong> field in the message to make ctrl rerun the method of the message at a scheduled interval.</p>
