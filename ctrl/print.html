@@ -1047,7 +1047,7 @@ echo "some cool text to put as file content.........." &gt; files/file.txt
 <p>Commit the changes to the repo, and the deployment should be executed if you have a kubernetes instance running on <strong>node1</strong>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="ctrl-as-prometheus-collector"><a class="header" href="#ctrl-as-prometheus-collector">ctrl as prometheus collector</a></h1>
 <p>ctrl can be used to collect collect metrics from various systems. It can for example scrape/read some defined metrics with one node, and deliver the result to another node where you can expose the metrics directly using ctrl's builtin http server, or you could for example inject the metrics data to some database if that is desired. It is totally up to you.</p>
-<p>The example that follows will scrape prometheus metrics with two ctrl nodes, deliver them to a third node called <strong>metrics</strong>, and expose them with the builtin http server. Prometheus can then be used to read all the metrics from the various nodes on the single <strong>central</strong> node.</p>
+<p>The example that follows will scrape prometheus metrics with two ctrl nodes, deliver them to a third node called <strong>metrics</strong>, and expose them with the builtin http server. Prometheus can then be used to read all the metrics from the various nodes on the <strong>metrics</strong> node.</p>
 <p>Before you start, make sure to read the <strong>User Guides</strong> section for how to start up a NATS broker, and for general information about setting up ctrl.</p>
 <h2 id="node-setup"><a class="header" href="#node-setup">Node Setup</a></h2>
 <h3 id="central-node"><a class="header" href="#central-node">central node</a></h3>
