@@ -1157,6 +1157,46 @@ START_PUB_HELLO=60
 http://localhost:6060/nodeexporters/node2/metrics.html
 </code></pre>
 <p>If you want to do something further with this example you can install prometheus on the <strong>metrics</strong> node, and direct it to collect read the metrics from the various folders via the url's above.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ctrl-as-tcp-forwarder-for-ssh"><a class="header" href="#ctrl-as-tcp-forwarder-for-ssh">ctrl as tcp forwarder for ssh</a></h1>
+<p>ctrl can be used to forward a TCP stream between two nodes. The Individual TCP packet will be read from a TCP listener on a node, put into a standard ctrl message, the message are then sent to the destination node using NATS PUB/SUB where the TCP packet is extracted, and written to the TCP connection.</p>
+<p>In the follwing example we have two nodes, where we can think of <strong>node1</strong> as the local node running on your computer, and node2 are the remote node running on a server somewhere.</p>
+<p>We want to connect with ssh to node2, but it is not directly available from the network where the local node1 resides, so we use ctrl as a proxy server and forward the ssh tcp stream.</p>
+</style>
+</head>
+<body>
+<p align="center"><img src="https://github.com/postmannen/ctrl/blob/main/doc/usecase-portforward-ssh.svg?raw=true" /></p>
+</body>
+<h2 id="steps"><a class="header" href="#steps">Steps</a></h2>
+<ol>
+<li>Create the message with forwarding details, and copy iy into <strong>node1's readfolder</strong>.</li>
+</ol>
+<pre><code class="language-yaml">---
+- toNodes:
+    - node1                 # The source node where we start the tcp listener
+  method: portSrc           # The ctrl tcp forward method
+  methodArgs:
+    - node2                 # The destination node who connects to the actual endpoint
+    - 192.168.99.1:22       # The ip address and port we want to connect to from endpoint.
+    - :10022                # The local port to start the listener on node1
+    - 30                    # How many seconds the tcp forwarder should be active
+  methodTimeout: 30         # Same as above, but at the method level. Set them to the same.
+  replyMethod: console      # Do logging to console on node1
+  ACKTimeout: 0             # No ACK'in of messages. Fire and forget.
+</code></pre>
+<ol>
+<li>
+<p>On <strong>node1</strong> a process with a TCP listener will be started at <strong>0.0.0.0:10022</strong>.</p>
+</li>
+<li>
+<p>The process on <strong>node1</strong> will then send a message to <strong>node2</strong> to start up a process and connect to the endpoint defined in the <strong>methodArgs</strong>.</p>
+</li>
+<li>
+<p>The forwarding are now up running, and we can use a ssh client to connect to the endpoint which are now forwarded the <strong>node1</strong> on port <strong>10022</strong>.</p>
+</li>
+</ol>
+<pre><code class="language-bash">ssh -p 10022 user@localhost
+</code></pre>
+<p>The forwarding will automatically end after the timeperiod specified, which in this example is 30 seconds.</p>
 
                     </main>
 
