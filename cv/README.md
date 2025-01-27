@@ -18,16 +18,16 @@ Github: [github.com/postmannen/ctrl](https://github.com/postmannen/ctrl)
 
 The most recent jobs and activities can be found below.
 
-### Apr 2024 - Present, Ikomm, Senior Security Engineer
+### 2024 - Present, Ikomm, Senior Security Engineer
 
 - Go Programming. Design and Build Security Platforms.
 
-### Jan 2020 - Jun 2023, Raa Labs, Contract
+### 2020 - 2023, Raa Labs, Contract
 
 - Build an Edge Cloud infrastructure/platform from the ground up for ships sailing around the globe.
 - Create an event driven infrastructure controller, [Steward](https://github.com/postmannen/steward) for [RaaLabs](https://raalabs.com)
 - Kubernetes on the Edge with K3s.
-- Created various tools and automation services, where most are opensourced with an MIT license and can be found at [Raalabs's Github](https://github.com/raalabs)
+- Created various tools for modudbus, Linux and automation services, where most are opensourced with an MIT license and can be found at [Raalabs's Github](https://github.com/raalabs)
 
 ### 2017 - 2019, Study programming
 
