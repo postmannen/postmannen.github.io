@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Http Get - ctrl</title>
+        <title>WebUI Overview - ctrl</title>
 
 
         <!-- Custom HTML head -->
@@ -155,51 +155,36 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="httpget"><a class="header" href="#httpget">httpGet</a></h1>
-<p>In JSON.</p>
-<pre><code class="language-json">[
-    {
-        "directory": "httpget",
-        "fileName": "finn.no.html",
-        "toNodes": ["node1","node2"],
-        "method":"httpGet",
-        "methodArgs": ["https://finn.no"],
-        "replyMethod":"file",
-        "ACKTimeout":5,
-        "retries":3,
-        "methodTimeout": 5
-    }
-]
-</code></pre>
-<p>In YAML.</p>
-<pre><code class="language-yaml">---
-- toNodes:
-    - ["node1","node2"]
-  method: httpGet
-  methodArgs:
-    - "https://finn.no"
-  replyMethod: file
-  ACKTimeout: 5
-  retries: 3
-  methodTimeout: 5
-  directory: httpget
-  fileName: finn.no.html
-</code></pre>
-<p>The result html file of the http get will be written to:</p>
-<ul>
-<li>&lt;data folder&gt;\httpget\node1\finn.no.html</li>
-<li>&lt;data folder&gt;\httpget\node2\finn.no.html</li>
-</ul>
+                        <h1 id="webui-overview"><a class="header" href="#webui-overview">WebUI Overview</a></h1>
+<p>The WebUI is a web application that allows you to interact with CTRL via NATS.</p>
+<p>NB: The WebUI is in early development.</p>
+<p><img src="https://github.com/postmannen/ctrl/blob/main/doc/webui-general.png" alt="WebUI General" /></p>
+<h2 id="features"><a class="header" href="#features">Features</a></h2>
+<h3 id="send-commands"><a class="header" href="#send-commands">Send Commands</a></h3>
+<p>Send commands to one or many nodes. The command will be sendt, executed, and the result will be displayed in the WebUI.</p>
+<h3 id="network-graph"><a class="header" href="#network-graph">Network Graph</a></h3>
+<p>Visualize the network of nodes.</p>
+<p>The graph shows the nodes that are connected to the central node, and the time since the last <strong>hello</strong> message was received from the node.</p>
+<p>When hovering over a node, the node details will be shown in a tooltip. The defined file templates for the node will also be shown in the tooltip, and the user can select one of the templates to use for the command to execute on the node.</p>
+<p><img src="https://github.com/postmannen/ctrl/blob/main/doc/webui-network-graph-infobox.png" alt="WebUI Network Graph" /></p>
+<h3 id="file-templates"><a class="header" href="#file-templates">File Templates</a></h3>
+<p>File templates containing a script can be used to execute commands. The file templates should be stored in the <strong>files</strong> directory on the <strong>central</strong> node. The WebUI will then ask the central node for available templates, and show the file templates in a dropdown menu for the user to select from.</p>
+<p><img src="https://github.com/postmannen/ctrl/blob/main/doc/webui-file-templates.png" alt="WebUI File Templates" /></p>
+<h3 id="settings"><a class="header" href="#settings">Settings</a></h3>
+<p>Set setting like the Node name of the UI, NATS server URL, and NKEY to use for authentication to the NATS server.</p>
+<p><img src="https://github.com/postmannen/ctrl/blob/main/doc/webui-settings.png" alt="WebUI Settings" /></p>
+<h3 id="flame-graph"><a class="header" href="#flame-graph">Flame Graph</a></h3>
+<p>In development.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="webui_overview.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="core_audit_log.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="example_standard_reqtailfile.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="example_standard_reqhttpget.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -209,11 +194,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="webui_overview.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="core_audit_log.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="example_standard_reqtailfile.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="example_standard_reqhttpget.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

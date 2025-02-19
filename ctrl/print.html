@@ -758,6 +758,26 @@ If <code>methodTimeout : -1</code> the method will not time out.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="signing-keys"><a class="header" href="#signing-keys">signing keys</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="acl"><a class="header" href="#acl">ACL</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="audit-log"><a class="header" href="#audit-log">audit log</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="webui-overview"><a class="header" href="#webui-overview">WebUI Overview</a></h1>
+<p>The WebUI is a web application that allows you to interact with CTRL via NATS.</p>
+<p>NB: The WebUI is in early development.</p>
+<p><img src="https://github.com/postmannen/ctrl/blob/main/doc/webui-general.png" alt="WebUI General" /></p>
+<h2 id="features"><a class="header" href="#features">Features</a></h2>
+<h3 id="send-commands"><a class="header" href="#send-commands">Send Commands</a></h3>
+<p>Send commands to one or many nodes. The command will be sendt, executed, and the result will be displayed in the WebUI.</p>
+<h3 id="network-graph"><a class="header" href="#network-graph">Network Graph</a></h3>
+<p>Visualize the network of nodes.</p>
+<p>The graph shows the nodes that are connected to the central node, and the time since the last <strong>hello</strong> message was received from the node.</p>
+<p>When hovering over a node, the node details will be shown in a tooltip. The defined file templates for the node will also be shown in the tooltip, and the user can select one of the templates to use for the command to execute on the node.</p>
+<p><img src="https://github.com/postmannen/ctrl/blob/main/doc/webui-network-graph-infobox.png" alt="WebUI Network Graph" /></p>
+<h3 id="file-templates"><a class="header" href="#file-templates">File Templates</a></h3>
+<p>File templates containing a script can be used to execute commands. The file templates should be stored in the <strong>files</strong> directory on the <strong>central</strong> node. The WebUI will then ask the central node for available templates, and show the file templates in a dropdown menu for the user to select from.</p>
+<p><img src="https://github.com/postmannen/ctrl/blob/main/doc/webui-file-templates.png" alt="WebUI File Templates" /></p>
+<h3 id="settings"><a class="header" href="#settings">Settings</a></h3>
+<p>Set setting like the Node name of the UI, NATS server URL, and NKEY to use for authentication to the NATS server.</p>
+<p><img src="https://github.com/postmannen/ctrl/blob/main/doc/webui-settings.png" alt="WebUI Settings" /></p>
+<h3 id="flame-graph"><a class="header" href="#flame-graph">Flame Graph</a></h3>
+<p>In development.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="httpget"><a class="header" href="#httpget">httpGet</a></h1>
 <p>In JSON.</p>
 <pre><code class="language-json">[
