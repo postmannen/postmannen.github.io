@@ -2,36 +2,39 @@
 
 Heliveien 945, 1820 Spydeberg, Norway  
 Phone: +47 90516604  
-Mail : postmannen@gmail.com | twitter : [twitter.com/erter1](https://twitter.com/erter1) | github : [github.com/postmannen](https://github.com/postmannen) | linkedin : [https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/](https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/)
+Mail : [postmannen@gmail.com](mailto:postmannen@gmail.com) | twitter : [twitter.com/erter1](https://twitter.com/erter1) | github : [github.com/postmannen](https://github.com/postmannen) | linkedin : [https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/](https://www.linkedin.com/in/bj%C3%B8rn-tore-svinningen-1394816/)
 
 ## Summary
 
-A highly skilled professional with a passion for knowledge and a keen interest in exploring various fields such as programming, networks, security, Linux, psychology, music, electronics, farming, and more. In 2017, I decided to focus on Go development as the primary area of expertise. My multidisciplinary background often provides me with the unique ability to tackle challenges from diverse angles, making me an effective contributor to successful product development and adept at solving intricate problems within projects or independently.
+A broadly skilled professional with a passion for knowledge and a genuine interest in various fields such as programming, networks, security, Linux, philosophy, music, electronics, farming, and more. In 2017 I decided to change focus and make a deeper dive into Go development. My multidisciplinary background often provides me with the ability to handle challenges from diverse angles, making me an effective contributor to successful product and business development and adept at solving problems within projects or independently.
 
 ## Professional Experience
 
 Been working with Data centers, Network, Security, Servers, and Monitoring since 1997, and made the switch to fulltime Development in 2017.
 
+I've chosen to focus on Go as my primary language, but do also good understanding of other languages like Python, Bash, JavaScript.
+
 Creator of **ctrl** a fleet manager service.\
 Doc: [postmannen.github.io/ctrl/](https://postmannen.github.io/ctrl/)\
-Github: [github.com/postmannen/ctrl](https://github.com/postmannen/ctrl)
+Github: [github.com/postmannen/ctrl](https://github.com/postmannen/ctrl )
 
 The most recent jobs and activities can be found below.
 
-### 2024 - Present, Ikomm, Senior Security Engineer
+### 2024 - Present, Ikomm, Senior Security Engineer / Architect
 
-- Go Programming. Design and Build Security Platforms.
+- Design and Build Security Platforms for municipalities.
+- Contribute to finding and implementing improvements in processes and systems to reduce costs and increase efficiency.
 
 ### 2020 - 2023, Raa Labs, Contract
 
-- Build an Edge Cloud infrastructure/platform from the ground up for ships sailing around the globe.
+- Build an Edge Cloud infrastructure/platform from the ground up for vessels sailing around the globe.
 - Create an event driven infrastructure controller, [Steward](https://github.com/postmannen/steward) for [RaaLabs](https://raalabs.com)
 - Kubernetes on the Edge with K3s.
-- Created various tools for modudbus, Linux and automation services, where most are opensourced with an MIT license and can be found at [Raalabs's Github](https://github.com/raalabs)
+- Created various tools for modudbus, Linux and automation services.
 
 ### 2017 - 2019, Study programming
 
-- Go, Software Architecture.
+- Go and Software Architecture.
 
 ### 2004 - Present, Self Employee, Freelance
 
@@ -44,7 +47,7 @@ The most recent jobs and activities can be found below.
 
 ### 2013 - 2017, Datametrix AS, Senior Network Consultant
 
-- Building a cloud platform from scratch for the Norwegian market
+- Part of a team building a cloud platform from scratch for the Norwegian market
 - Network/Security architecture done with Cisco, Checkpoint and F5 on Datametrix's Cloud provider network.
 - Network and services monitoring based on Centreon/Nagios.
 - Automation and orchestration of cloud services
@@ -81,7 +84,7 @@ The most recent jobs and activities can be found below.
 
 ## Technical Experience
 
-I like to know how technology and the value chain work as a whole.  Other areas where i have good experience are:
+I like to know how technology and the value chain work as a whole so I can make decissions based on a holistic view. Other areas where i have good experience are:
 
 - Operating systems with services: Linux and Windows.
 - Monitoring systems.
@@ -105,11 +108,9 @@ I like to know how technology and the value chain work as a whole.  Other areas 
 
 #### Some more examples of my projects and ideas are mentioned below
 
-- Async management of servers/endpoints using Nats where everything is done with passing messages and concurrent. [Steward](https://github.com/postmannen/steward)
+- Async management of servers/endpoints using Nats where everything is done with passing messages and concurrent. [ctrl](https://github.com/postmannen/ctrl)
 
-- CTRL, async fleet manager. The original repository of Steward were made private, and CTRL is the continuation of honing that idea on my own [CTRL](https://github.com/postmannen/ctrl).
-
-- Traffic sniffer who lets you know what your computer communicated with, and how much data transfered. [trafficmonitor](https://github.com/RaaLabs/trafficmonitor)
+- Traffic sniffer who lets you know what your computer actually communicates with, protocols in use, and more. [trafficmonitor](https://github.com/postmannen/trafficmonitor)
 
 - Driver for Parrot drones. [parrot](https://github.com/postmannen/parrot)
 
@@ -118,7 +119,7 @@ I like to know how technology and the value chain work as a whole.  Other areas 
 ### Things I plan to look more into in the future
 
 - Use of Go with embedded devices and micro controllers.
-- Read and analyze Network Data with Go.
+- AI on the Edge.
 
 ## Education
 
