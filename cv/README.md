@@ -6,17 +6,21 @@ Mail : [postmannen@gmail.com](mailto:postmannen@gmail.com) | twitter : [twitter.
 
 ## Summary
 
-A broadly skilled professional with a passion for knowledge and a genuine interest in various fields such as programming, networks, security, Linux, philosophy, music, electronics, farming, and more. In 2017 I decided to change focus and make a deeper dive into Go development. My multidisciplinary background often provides me with the ability to handle challenges from diverse angles, making me an effective contributor to successful product and business development and adept at solving problems within projects or independently.
+A skilled professional with a passion for knowledge and a genuine interest in various fields such as programming, networks, security, Linux, philosophy, music, electronics, farming, and more. In 2017 I decided to change focus from infrastructure to Go development. My multidisciplinary background often provides me with the ability to handle challenges from diverse angles, making me an effective contributor to successful product and business development and adept at solving problems within projects or independently.
 
 ## Professional Experience
 
-Been working with Data centers, Network, Security, Servers, and Monitoring since 1997, and made the switch to fulltime Development in 2017.
+Been working with Data centers, Network, Security, Servers, and Monitoring since 1997, and made the switch to Development in 2017. Are now often found somwhere inbetween the code and the infrastructure :)
 
 I've chosen to focus on Go as my primary language, but do also good understanding of other languages like Python, Bash, JavaScript.
 
 Creator of **ctrl** a fleet manager service.\
 Doc: [postmannen.github.io/ctrl/](https://postmannen.github.io/ctrl/)\
 Github: [github.com/postmannen/ctrl](https://github.com/postmannen/ctrl )
+
+Before 2017 I was working as a Network Engineer and a lot of Linux for monitoring, logging and automation.
+
+I've been part of building two cloud platforms on-prem from scratch. One cloud, and one edge cloud.
 
 The most recent jobs and activities can be found below.
 
