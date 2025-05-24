@@ -12,7 +12,7 @@ A skilled professional with a passion for knowledge and a genuine interest in va
 
 Been working with Data centers, Network, Security, Servers, and Monitoring since 1997, and made the switch to Development in 2017. Are now often found somwhere inbetween the code and the infrastructure :)
 
-I've chosen to focus on Go as my primary language, but do also good understanding of other languages like Python, Bash, JavaScript.
+I've chosen to focus on Go as my primary language, but do also have agood understanding of other languages like Python, Bash, JavaScript.
 
 Creator of **ctrl** a fleet manager service.\
 Doc: [postmannen.github.io/ctrl/](https://postmannen.github.io/ctrl/)\
@@ -34,7 +34,7 @@ The most recent jobs and activities can be found below.
 - Build an Edge Cloud infrastructure/platform from the ground up for vessels sailing around the globe.
 - Create an event driven infrastructure controller, [Steward](https://github.com/postmannen/steward) for [RaaLabs](https://raalabs.com)
 - Kubernetes on the Edge with K3s.
-- Created various tools for modudbus, Linux and automation services.
+- Created various tools for modbus, Linux and automation services.
 
 ### 2017 - 2019, Study programming
 
